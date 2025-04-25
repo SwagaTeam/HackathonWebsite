@@ -19,7 +19,7 @@ public class UserMapper
         };
     }
 
-    public static UserEntity UserToEntity(UserAuthDto userAuthDto, Guid salt)
+    public static UserEntity UserToEntity(UserAuthDto userAuthDto, string salt)
     {
         return new UserEntity
         {

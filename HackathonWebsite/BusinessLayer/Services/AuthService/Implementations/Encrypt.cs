@@ -5,7 +5,7 @@ namespace HackathonWebsite.BusinessLayer.Services.AuthService.Implementations;
 
 public class Encrypt : IEncrypt
 {
-    public string HashPassword(string password, Guid salt)
+    public string HashPassword(string password, string salt)
     {
         return Convert.ToBase64String(KeyDerivation.Pbkdf2(
             password,

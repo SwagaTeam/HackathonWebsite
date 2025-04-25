@@ -14,8 +14,10 @@ public class AuthController(IAuthService authService, ILogger<AuthController> lo
         try
         {
             var userId = authService.GetCurrentUserId();
+            var userRoles = authService.GetCurrentUserRoles();
+
             if (userId == -1) return Unauthorized("Not logged in");
-            return Ok(userId);
+            return Ok(new {id = userId, roles = userRoles });
         }
         catch (Exception ex)
         {
