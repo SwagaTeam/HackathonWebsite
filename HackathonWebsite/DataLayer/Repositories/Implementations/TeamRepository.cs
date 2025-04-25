@@ -67,5 +67,41 @@ namespace HackathonWebsite.DataLayer.Repositories.Implementations
             team.Participants.Add(user);
             await context.SaveChangesAsync();
         }
+
+        public async Task AddGithubLink(int teamId, string link)
+        {
+            var team = await context.Teams.FirstOrDefaultAsync(x => x.Id == teamId);
+            if (team is not null) 
+            {
+                team.GitHubLink = link;
+                await context.SaveChangesAsync();
+            }
+                
+            throw new NullReferenceException($"Не существует команды с айди {team.Id}");
+        }
+
+        public async Task AddGoogleLink(int teamId, string link)
+        {
+            var team = await context.Teams.FirstOrDefaultAsync(x => x.Id == teamId);
+            if (team is not null)
+            {
+                team.GoogleDiskLink = link;
+                await context.SaveChangesAsync();
+            }
+
+            throw new NullReferenceException($"Не существует команды с айди {team.Id}");
+        }
+
+        public async Task<TeamEntity?> GetByUserId(int id)
+        {
+            var team = await context.Teams
+                .Include(x=>x.Participants)
+                .Where(x=>x.Participants.Any(x=>x.Id == id))
+                .FirstOrDefaultAsync();
+
+            if (team is not null)
+                return team;
+            throw new NullReferenceException($"Не существует команды с юзером {team.Id}");
+        }
     }
 }

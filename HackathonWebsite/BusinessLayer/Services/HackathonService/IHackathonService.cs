@@ -1,4 +1,5 @@
-﻿using HackathonWebsite.DTO.Hackaton;
+﻿using HackathonWebsite.DataLayer.Entities;
+using HackathonWebsite.DTO.Hackaton;
 
 namespace HackathonWebsite.BusinessLayer.Services.HackathonService
 {
@@ -9,5 +10,8 @@ namespace HackathonWebsite.BusinessLayer.Services.HackathonService
         Task<int> Delete(int id);
         Task<HackatonDto> GetById(int id);
         Task<HackatonDto> GetByName(string name);
+
+        Task<HackathonEntity> GetActiveHackaton();
+        Task<int> SetActiveHackaton(int id);
     }
 }

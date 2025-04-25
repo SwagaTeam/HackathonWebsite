@@ -7,7 +7,11 @@ using HackathonWebsite.Mapper;
 
 namespace HackathonWebsite.BusinessLayer.Services.TeamService
 {
-    public class TeamService(ITeamRepository repository, ICaseService caseService, IAuthService authService, IUserService userService) : ITeamService
+    public class TeamService(
+        ITeamRepository repository, 
+        ICaseService caseService, 
+        IAuthService authService, 
+        IUserService userService) : ITeamService
     {
         public async Task<int> Create(TeamDto team)
         {
@@ -55,6 +59,22 @@ namespace HackathonWebsite.BusinessLayer.Services.TeamService
         public async Task AddInTeam(int teamId, int userId)
         {
             await repository.AddInTeam(teamId, userId);
+        }
+
+        public async Task AddGithubLink(int teamId, string link)
+        {
+            await repository.AddGithubLink(teamId, link);
+        }
+
+        public async Task AddGoogleLink(int teamId, string link)
+        {
+            await repository.AddGoogleLink(teamId, link);
+        }
+
+        public async Task<TeamDto> GetByUser(int id)
+        {
+            var team = await repository.GetByUserId(id);
+            return TeamMapper.TeamToDto(team!);
         }
     }
 }

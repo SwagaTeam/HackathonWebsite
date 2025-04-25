@@ -10,5 +10,7 @@ namespace HackathonWebsite.DataLayer.Repositories.Implementations
         Task Delete(int id);
         Task<HackathonEntity> GetById(int id);
         Task<HackathonEntity> GetByName(string name);
+        Task<HackathonEntity> GetActiveHackaton();
+        Task<int> SetActiveHackaton(int id);
     }
 }
