@@ -28,6 +28,7 @@ namespace HackathonWebsite.Controllers.AppliesController
         public async Task<IActionResult> SendInvite(int applyId)
         {
             var apply = await applyService.GetApplyToTeamById(applyId);
+
             var team = apply.Team;
             var user = apply.User;
             var email = user.Email;
@@ -35,6 +36,20 @@ namespace HackathonWebsite.Controllers.AppliesController
             var canSend = await applyService.SendInvite(email, link, TeamMapper.TeamToDto(team));
             if (!canSend) throw new Exception("Сообщение не отправилось");
             return Ok(canSend);
+        }
+
+        [HttpPost("create-team-apply")]
+        public async Task<IActionResult> CreateTeamApply(ApplyToTeamDto dto)
+        {
+            var currentId = authService.GetCurrentUserId();
+
+            if (currentId != -1)
+            {
+                await applyService.CreateApplyTeam(dto);
+                return Ok();
+            }
+
+            return Unauthorized("Not authorized");
         }
 
         [HttpPost("create-hack-apply")]

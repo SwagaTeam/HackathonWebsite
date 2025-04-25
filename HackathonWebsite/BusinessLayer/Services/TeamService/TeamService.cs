@@ -16,7 +16,8 @@ namespace HackathonWebsite.BusinessLayer.Services.TeamService
         public async Task<int> Create(TeamDto team)
         {
             var @case = await caseService.GetById(team.CaseId);
-            if (@case is null) throw new NullReferenceException("Нельзя создать команду под несуществующий кейс");
+            //Андрей сказал можно 
+            //if (@case is null) throw new NullReferenceException("Нельзя создать команду под несуществующий кейс");
             var currentId = authService.GetCurrentUserId();
             team.LeaderId = currentId;
             team.Link = Guid.NewGuid().ToString();
