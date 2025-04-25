@@ -19,5 +19,18 @@ namespace HackathonWebsite.Controllers.UserController
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpPost("{id}/set-role")]
+        public async Task<IActionResult> GetUser(int id, [FromBody]string role)
+        {
+            try
+            {
+                return Ok(await userService.SetRole(id, role));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

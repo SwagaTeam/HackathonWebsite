@@ -6,5 +6,5 @@ public interface IUserService
 {
     public Task<UserEntity> GetByEmail(string email);
     public Task<UserEntity> GetById(int id);
-
+    Task<int> SetRole(int id, string role);
 }

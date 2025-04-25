@@ -48,5 +48,16 @@ namespace HackathonWebsite.DataLayer.Repositories.Implementations
             await context
                 .SaveChangesAsync();
         }
+
+        public async Task<int> SetRole(int id, string role)
+        {
+            var user = await context.Users.FindAsync(id);
+            if (user is null)
+                throw new NullReferenceException("User does not exist");
+            user.Role = role;
+            await context.SaveChangesAsync();
+
+            return id;
+        }
     }
 }
