@@ -16,75 +16,118 @@ namespace HackathonWebsite.Controllers.AppliesController
         [HttpGet("hackaton-applies/get")]
         public async Task<IActionResult> GetHackApplies()
         {
-            var role = authService.GetCurrentUserRoles();
+            try
+            {
+                var role = authService.GetCurrentUserRoles();
 
-            if (role != Roles.ADMIN) return Unauthorized("Not enough permissions");
-            var applies = await applyService.GetApplyToHack();
-            return Ok(applies);
+                if (role != Roles.ADMIN) return Unauthorized("Not enough permissions");
+                var applies = await applyService.GetApplyToHack();
+                return Ok(applies);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
 
         }
 
         [HttpGet("team-applies/get")]
         public async Task<IActionResult> GetTeamApplies()
         {
-            var applies = await applyService.GetApplyToTeam();
-            return Ok(applies);
+            try
+            {
+                var applies = await applyService.GetApplyToTeam();
+                return Ok(applies);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost("team-applies/send-invite/{applyId}")]
         public async Task<IActionResult> SendInvite(int applyId)
         {
-            var apply = await applyService.GetApplyToTeamById(applyId);
+            try
+            {
+                var apply = await applyService.GetApplyToTeamById(applyId);
 
-            var team = apply.Team;
-            var user = apply.User;
-            var email = user.Email;
-            var link = $"{Request.Scheme}://{Request.Host}/team/invite/{team.Link}";
-            var canSend = await applyService.SendInvite(email, link, TeamMapper.TeamToDto(team));
-            if (!canSend) throw new Exception("Сообщение не отправилось");
-            return Ok(canSend);
+                var team = apply.Team;
+                var user = apply.User;
+                var email = user.Email;
+                var link = $"{Request.Scheme}://{Request.Host}/team/invite/{team.Link}";
+                var canSend = await applyService.SendInvite(email, link, TeamMapper.TeamToDto(team));
+                if (!canSend) throw new Exception("Сообщение не отправилось");
+                return Ok(canSend);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost("create-team-apply")]
         public async Task<IActionResult> CreateTeamApply(ApplyToTeamDto dto)
         {
-            var currentId = authService.GetCurrentUserId();
-
-            if (currentId != -1)
+            try
             {
-                await applyService.CreateApplyTeam(dto);
-                return Ok();
-            }
+                var currentId = authService.GetCurrentUserId();
 
-            return Unauthorized("Not authorized");
+                if (currentId != -1)
+                {
+                    await applyService.CreateApplyTeam(dto);
+                    return Ok();
+                }
+
+                return Unauthorized("Not authorized");
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost("create-hack-apply")]
         public async Task<IActionResult> CreateHackatonApply(ApplyToHackDto dto)
         {
-            var currentId = authService.GetCurrentUserId();
-
-            if(currentId != -1)
+            try
             {
-                await applyService.CreateApplyHack(dto);
-                return Ok();
-            }
+                var currentId = authService.GetCurrentUserId();
 
-            return Unauthorized("Not authorized");
+                if (currentId != -1)
+                {
+                    await applyService.CreateApplyHack(dto);
+                    return Ok();
+                }
+
+                return Unauthorized("Not authorized");
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            
         }
 
         [HttpPost("approve-hack-apply/{id}")]
         public async Task<IActionResult> ApproveHackatonApply(int id)
         {
-            var role = authService.GetCurrentUserRoles();
-
-            if (role == Roles.ADMIN)
+            try
             {
-                await applyService.ApproveApplyHack(id);
-                return Ok();
-            }
+                var role = authService.GetCurrentUserRoles();
 
-            return Unauthorized("Not enough permissions");
+                if (role == Roles.ADMIN)
+                {
+                    await applyService.ApproveApplyHack(id);
+                    return Ok();
+                }
+
+                return Unauthorized("Not enough permissions");
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

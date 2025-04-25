@@ -34,6 +34,11 @@ namespace HackathonWebsite.DataLayer.Repositories.Implementations
             return existingCase;
         }
 
+        public async Task<ICollection<CaseEntity>> Get()
+        {
+            return await dbContext.Cases.ToListAsync();
+        }
+
         public async Task<CaseEntity> GetByName(string name)
         {
             var existingCase = await dbContext.Cases.FirstOrDefaultAsync(x => x.Title == name);

@@ -22,7 +22,7 @@ namespace HackathonWebsite.DataLayer.Repositories.Implementations
         public async Task Delete(int id)
         {
             var team = await GetById(id);
-            if (team is null) throw new NullReferenceException();
+            if (team is null) throw new NullReferenceException("Команда не найдена");
             context
                 .Teams
                 .Remove(team);
