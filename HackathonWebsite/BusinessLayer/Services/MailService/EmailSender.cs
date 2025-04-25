@@ -9,7 +9,7 @@
         }
         public async Task<bool> SendEmailAsync(string email, string subject, string message)
         {
-            MailData mailData = new MailData(
+            var mailData = new MailData(
                 to: new List<string> { email },
                 subject: subject,
                 body: message,
@@ -19,7 +19,7 @@
                 cc: new List<string> { "TestMessagesService@yandex.ru" }
             );
 
-            bool result = await mailService.SendAsync(mailData);
+            var result = await mailService.SendAsync(mailData);
 
             return result;
         }

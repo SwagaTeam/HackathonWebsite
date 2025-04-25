@@ -1,5 +1,6 @@
 ﻿using HackathonWebsite.DataLayer.Entities;
 using HackathonWebsite.DTO;
+using HackathonWebsite.Dto.Team;
 
 namespace HackathonWebsite.BusinessLayer.Services.ApplyService
 {
@@ -13,6 +14,7 @@ namespace HackathonWebsite.BusinessLayer.Services.ApplyService
         Task ApproveApplyHack(int applyId);
 
         Task<int> CreateApplyTeam(ApplyToTeamDto dto);
-        Task ApproveApplyTeam(int applyId);
+        Task<bool> SendInvite(string email, string link, TeamDto team);
+        Task<ApplyToTeamEntity> GetApplyToTeamById(int applyId);
     }
 }

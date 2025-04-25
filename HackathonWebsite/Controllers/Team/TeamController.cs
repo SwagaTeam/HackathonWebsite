@@ -1,3 +1,4 @@
+using HackathonWebsite.BusinessLayer.Services.ApplyService;
 using HackathonWebsite.BusinessLayer.Services.AuthService;
 using HackathonWebsite.BusinessLayer.Services.MailService;
 using HackathonWebsite.BusinessLayer.Services.TeamService;
@@ -14,7 +15,7 @@ public class TeamController(
     ITeamService teamService, 
     IAuthService authService,
     IUserService userService,
-    IEmailSender mailSender) : ControllerBase
+    IApplyService applyService) : ControllerBase
 {
     [HttpPost]
     public async Task<int> Create([FromBody] TeamDto team)
@@ -27,22 +28,11 @@ public class TeamController(
     {
         var currentUserId = authService.GetCurrentUserId();
         var team = await teamService.GetByLeadId((int)currentUserId!);
-        var link = team.Link;
-
-        link = $"{Request.Scheme}://{Request.Host}/team/invite/{link}";
-
-        var user = await userService.GetByEmail(email);
-
-        if (user is null || team is null)
-            return BadRequest("Такого пользователя не существует либо нет команды");
-
-        await mailSender.SendEmailAsync(
-            email,
-            "Приглашение в команду",
-            $"Здравствуйте, {user.FullName}, вы были приглашены на хакатон в команду {team.Title}.\n" +
-            $"Ссылка-приглашение: {link}");
-
-        return Ok(link);
+        if (team is null) throw new Exception("Не лидер команды не может приглашать участников в нее");
+        var link = $"{Request.Scheme}://{Request.Host}/team/invite/{team.Link}";
+        var canSend = await applyService.SendInvite(email, link, team);
+        if (canSend) return Ok(link);
+        return BadRequest("Не получилось отправить письмо((");
     }
 
     [HttpPost("invite/{link}")]
