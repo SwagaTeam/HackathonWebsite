@@ -17,6 +17,7 @@ using HackathonWebsite.DataLayer.Repositories.Abstractions;
 using HackathonWebsite.DataLayer.Repositories.Implementations;
 using HackathonWebsite.Middleware;
 using HackathonWebsite.BusinessLayer.Services.MailService;
+using HackathonWebsite.BusinessLayer.Services.ApplyService;
 
 namespace HackathonWebsite
 {
@@ -70,14 +71,18 @@ namespace HackathonWebsite
             services.AddScoped<ICaseService, CaseService>();
             services.AddScoped<IHackathonService, HackathonService>();
             services.AddScoped<IAdminRepository, AdminRepository>();
+            services.AddScoped<ITeamService, TeamService>();
+            services.AddScoped<ITeamRepository, TeamRepository>();
+            services.AddScoped<IApplyHackRepository, ApplyHackRepository>();
+            services.AddScoped<IApplyTeamRepository, ApplyTeamRepository>();
+            services.AddScoped<IApplyService, ApplyService>();
 
             services.AddScoped<IEmailSender, EmailSender>();
             services.AddTransient<IMailService, MailService>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IBlackListService, BlackListService>();
-            services.AddScoped<ITeamService, TeamService>();
-            services.AddScoped<ITeamRepository, TeamRepository>();
+            
 
             services.Configure<MailSettings>(
                 configuration.GetSection(nameof(MailSettings))

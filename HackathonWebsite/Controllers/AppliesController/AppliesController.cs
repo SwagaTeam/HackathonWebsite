@@ -24,6 +24,13 @@ namespace HackathonWebsite.Controllers.AppliesController
 
         }
 
+        [HttpGet("team-applies/get")]
+        public async Task<IActionResult> GetTeamApplies()
+        {
+            var applies = await applyService.GetApplyToTeam();
+            return Ok(applies);
+        }
+
         [HttpPost("team-applies/send-invite/{applyId}")]
         public async Task<IActionResult> SendInvite(int applyId)
         {

@@ -75,7 +75,7 @@ namespace HackathonWebsite.Controllers.Hackaton
             return Ok(await hackathonService.GetActiveHackaton());
         }
 
-        [HttpGet("set/active/{id}")]
+        [HttpPost("set/active/{id}")]
         public async Task<IActionResult> SetActiveHackaton(int id)
         {
             return Ok(await hackathonService.SetActiveHackaton(id));
