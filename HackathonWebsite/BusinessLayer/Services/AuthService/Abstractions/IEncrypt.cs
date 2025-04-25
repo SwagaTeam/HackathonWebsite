@@ -2,5 +2,5 @@
 
 public interface IEncrypt
 {
-    public string HashPassword(string password, string salt);
+    public string HashPassword(string password, Guid salt);
 }
