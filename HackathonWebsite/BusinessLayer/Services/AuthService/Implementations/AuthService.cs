@@ -2,10 +2,9 @@
 using System.Security.Claims;
 using System.Text;
 using HackathonWebsite.BusinessLayer.Services.AuthService.Abstractions;
+using HackathonWebsite.DataLayer.Repositories.Abstractions;
 using HackathonWebsite.DataLayer.Repositories.Implementations;
-using HackathonWebsite.DTO;
 using HackathonWebsite.DTO.Auth;
-using HackathonWebsite.DTO.Auth.AdminAuth;
 using HackathonWebsite.DTO.Auth.UserAuth;
 using HackathonWebsite.Mapper;
 using Microsoft.IdentityModel.Tokens;
@@ -13,7 +12,8 @@ using Microsoft.IdentityModel.Tokens;
 namespace HackathonWebsite.BusinessLayer.Services.AuthService.Implementations;
 
 public class AuthService(
-    IUserRepository repository,
+    IUserRepository userRepository,
+    IAdminRepository adminRepository,
     IEncrypt encrypt,
     IHttpContextAccessor httpContextAccessor,
     IConfiguration configuration,
@@ -27,22 +27,43 @@ public class AuthService(
             throw new ArgumentException(string.Join(", ", result.Errors.Select(e => e.ErrorMessage)));
         var salt = Guid.NewGuid().ToString();
         user.Password = encrypt.HashPassword(user.Password, salt);
-        await repository.Create(UserMapper.UserToEntity(user, salt));
+        await userRepository.Create(UserMapper.UserToEntity(user, salt));
         return (int)user.Id!;
     }
 
-    public async Task<UserAuthDto> Login(string email, string password)
+    public async Task<IUser> Login(string email, string password, bool isAdmin)
     {
-        var user = await repository.GetByEmail(email);
-        return user is not null && user.Password == encrypt.HashPassword(password, user.Salt)
-            ? UserMapper.UserToDto(user)
-            : null!;
+        if (isAdmin)
+        {
+            var user = await adminRepository.GetByEmail(email);
+            var dto = AdminMapper.AdminToDto(user);
+            return user is not null && user.Password == encrypt.HashPassword(password, user.Salt)
+                ? dto
+                : null!;
+        }
+        else
+        {
+            var user = await userRepository.GetByEmail(email);
+            return user is not null && user.Password == encrypt.HashPassword(password, user.Salt)
+                ? UserMapper.UserToDto(user)
+                : null!;
+        }
     }
 
-    public List<string> GetCurrentUserRoles()
+    public async Task<int> AdminRegister(AdminAuthDto admin)
+    {
+        var role = GetCurrentUserRoles();
+        if (role is not "Admin") throw new UnauthorizedAccessException("Доступ запрещен. Только для администраторов.");
+        var salt = Guid.NewGuid().ToString();
+        admin.Password = encrypt.HashPassword(admin.Password, salt);
+        await adminRepository.Create(AdminMapper.AdminToEntity(admin, salt));
+        return admin.Id;
+    }
+    
+    public string GetCurrentUserRoles()
     {
         var claimsIdentity = httpContextAccessor.HttpContext?.User.Identity as ClaimsIdentity;
-        return claimsIdentity?.FindAll(ClaimTypes.Role).Select(claim => claim.Value).ToList() ?? new List<string>();
+        return claimsIdentity?.FindAll(ClaimTypes.Role).Select(claim => claim.Value).FirstOrDefault();
     }
 
     public int? GetCurrentUserId()

@@ -1,10 +1,9 @@
-﻿namespace HackathonWebsite.DTO.Auth.AdminAuth
+﻿using HackathonWebsite.DTO.Auth;
+
+public class AdminAuthDto : IUser
 {
-    public class AdminAuthDto : IUser
-    {
-        public int? Id { get; set; }
-        public string Nickname { get; set; }
-        public string Password { get; set; }
-        public string UniqueId => Id.ToString();
-    }
+    public int Id { get; set; }
+    public string Nickname { get; set; }
+    public string Password { get; set; }
+    public string UniqueId => Id.ToString();
 }
