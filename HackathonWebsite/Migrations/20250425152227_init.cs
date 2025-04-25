@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HackathonWebsite.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -110,8 +110,10 @@ namespace HackathonWebsite.Migrations
                     Title = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
                     Link = table.Column<string>(type: "text", nullable: false),
-                    LeaderId = table.Column<int>(type: "integer", nullable: false),
-                    CaseId = table.Column<int>(type: "integer", nullable: false)
+                    LeaderId = table.Column<int>(type: "integer", nullable: true),
+                    CaseId = table.Column<int>(type: "integer", nullable: false),
+                    GitHubLink = table.Column<string>(type: "text", nullable: false),
+                    GoogleDiskLink = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -219,8 +221,7 @@ namespace HackathonWebsite.Migrations
                 table: "Teams",
                 column: "LeaderId",
                 principalTable: "Users",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                principalColumn: "Id");
         }
 
         /// <inheritdoc />

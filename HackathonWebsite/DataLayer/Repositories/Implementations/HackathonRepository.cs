@@ -2,57 +2,44 @@
 using HackathonWebsite.Mapper;
 using Microsoft.EntityFrameworkCore;
 using System.Xml.Linq;
+using HackathonWebsite.DataLayer.Entities;
 
 namespace HackathonWebsite.DataLayer.Repositories.Implementations
 {
     public class HackathonRepository(AppDbContext dbContext) : IHackathonRepository
     {
-        public async Task<int> Create(HackatonDto hackaton)
+        public async Task Create(HackathonEntity hackaton)
         {
-            await dbContext.Hackathons.AddAsync(HackatonMapper.HackathonDtoToEntity(hackaton));
+            await dbContext.AddAsync(hackaton);
             await dbContext.SaveChangesAsync();
-
-            return hackaton.Id;
         }
 
-        public async Task<int> Delete(int id)
+        public async Task Delete(int id)
         {
-            var hackaton = await dbContext.Hackathons.FindAsync(id);
+            var hackaton = await GetById(id);
             if (hackaton is not null)
             {
                 dbContext.Hackathons.Remove(hackaton);
                 await dbContext.SaveChangesAsync();
             }
-            return id;
         }
 
-        public async Task<HackatonDto> GetById(int id)
+        public async Task<HackathonEntity> GetById(int id)
         {
             var hackaton = await dbContext.Hackathons.FindAsync(id);
-            return HackatonMapper.HackathonEntityToDto(hackaton);
+            return hackaton;
         }
 
-        public async Task<HackatonDto> GetByName(string name)
+        public async Task<HackathonEntity> GetByName(string name)
         {
             var hackaton = await dbContext.Hackathons.FirstOrDefaultAsync(x=>x.Title == name);
-            return HackatonMapper.HackathonEntityToDto(hackaton);
+            return hackaton;
         }
 
-        public async Task<int> Update(HackatonDto hackaton)
+        public async Task Update(HackathonEntity hackaton)
         {
-            var entity = await dbContext.Hackathons.FirstOrDefaultAsync(x => x.Title == hackaton.Title);
-
-            if (entity is not null)
-            {
-                entity.Title = hackaton.Title;
-                entity.Description = hackaton.Description;
-                await dbContext.SaveChangesAsync();
-            }
-            else
-                throw new NullReferenceException($"Не существует хакатона с айди {hackaton.Id}");
-
-            return hackaton.Id;
-
+            if (hackaton is not null) dbContext.Hackathons.Update(hackaton);
+            else throw new NullReferenceException($"Не существует хакатона с айди {hackaton.Id}");
         }
     }
 }

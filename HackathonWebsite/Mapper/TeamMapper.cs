@@ -13,6 +13,10 @@ public class TeamMapper
             Link = team.Link,
             LeaderId = team.LeaderId,
             CaseId = team.CaseId,
+            GitHubLink = team.GitHubLink,
+            GoogleDiskLink = team.GoogleDiskLink,
+            Title = team.Title,
+            Description = team.Description,
         };
     }
 
@@ -24,6 +28,10 @@ public class TeamMapper
             Link = teamDto.Link,
             LeaderId = teamDto.LeaderId,
             CaseId = teamDto.CaseId,
+            GitHubLink = teamDto.GitHubLink,
+            GoogleDiskLink = teamDto.GoogleDiskLink,
+            Title = teamDto.Title,
+            Description = teamDto.Description,
         };
     }
 }

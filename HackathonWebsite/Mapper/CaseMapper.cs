@@ -5,7 +5,7 @@ namespace HackathonWebsite.Mapper
 {
     public static class CaseMapper
     {
-        public static CaseEntity CaseDtoToCaseEntity(CaseDto dto)
+        public static CaseEntity CaseToEntity(CaseDto dto)
         {
             return new CaseEntity
             {
@@ -16,7 +16,7 @@ namespace HackathonWebsite.Mapper
             };
         }
 
-        public static CaseDto CaseDtoToCaseEntity(CaseEntity dto)
+        public static CaseDto CaseToDto(CaseEntity dto)
         {
             return new CaseDto
             {

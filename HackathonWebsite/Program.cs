@@ -9,6 +9,9 @@ using System.Text;
 using HackathonWebsite.BusinessLayer.Services.AuthService;
 using HackathonWebsite.BusinessLayer.Services.AuthService.Abstractions;
 using HackathonWebsite.BusinessLayer.Services.AuthService.Implementations;
+using HackathonWebsite.BusinessLayer.Services.CaseService;
+using HackathonWebsite.BusinessLayer.Services.HackathonService;
+using HackathonWebsite.BusinessLayer.Services.TeamService;
 using HackathonWebsite.BusinessLayer.Services.UserService;
 using HackathonWebsite.DataLayer.Repositories.Abstractions;
 using HackathonWebsite.DataLayer.Repositories.Implementations;
@@ -59,9 +62,15 @@ namespace HackathonWebsite
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IEncrypt, Encrypt>();
+            services.AddScoped<IHackathonRepository, HackathonRepository>();
+            services.AddScoped<ICaseRepository, CaseRepository>();
+            services.AddScoped<ICaseService, CaseService>();
+            services.AddScoped<IHackathonService, HackathonService>();
             services.AddScoped<IAdminRepository, AdminRepository>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IBlackListService, BlackListService>();
+            services.AddScoped<ITeamService, TeamService>();
+            services.AddScoped<ITeamRepository, TeamRepository>();
 
             services.AddCors(options =>
             {

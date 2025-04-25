@@ -1,5 +1,6 @@
 ﻿using HackathonWebsite.DataLayer.Repositories.Implementations;
 using HackathonWebsite.DTO.Hackaton;
+using HackathonWebsite.Mapper;
 
 namespace HackathonWebsite.BusinessLayer.Services.HackathonService
 {
@@ -7,27 +8,32 @@ namespace HackathonWebsite.BusinessLayer.Services.HackathonService
     {
         public async Task<int> Create(HackatonDto hackaton)
         {
-            return await hackathonRepository.Create(hackaton);
+            var hackatonEntity = HackatonMapper.HackathonToEntity(hackaton);
+            await hackathonRepository.Create(hackatonEntity);
+            return hackatonEntity.Id;
         }
 
         public async Task<int> Delete(int id)
         {
-            return await hackathonRepository.Delete(id);
+            await hackathonRepository.Delete(id);
+            return id;
         }
 
         public async Task<HackatonDto> GetById(int id)
         {
-            return await hackathonRepository.GetById(id);
+            return HackatonMapper.HackathonToDto(await hackathonRepository.GetById(id));
         }
 
         public async Task<HackatonDto> GetByName(string name)
         {
-            return await hackathonRepository.GetByName(name);
+            return HackatonMapper.HackathonToDto(await hackathonRepository.GetByName(name));
         }
 
         public async Task<int> Update(HackatonDto hackaton)
         {
-            return await hackathonRepository.Update(hackaton);
+            var hackatonEntity = HackatonMapper.HackathonToEntity(hackaton);
+            await hackathonRepository.Update(hackatonEntity);
+            return hackatonEntity.Id;
         }
     }
 }

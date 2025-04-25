@@ -1,14 +1,15 @@
-﻿using HackathonWebsite.DTO.Case;
+﻿using HackathonWebsite.DataLayer.Entities;
+using HackathonWebsite.DTO.Case;
 using HackathonWebsite.DTO.Hackaton;
 
 namespace HackathonWebsite.DataLayer.Repositories.Implementations
 {
     public interface ICaseRepository
     {
-        Task<int> Create(CaseDto @case);
-        Task<int> Update(CaseDto @case);
-        Task<int> Delete(int id);
-        Task<CaseDto> GetById(int id);
-        Task<CaseDto> GetByName(string name);
+        Task Create(CaseEntity @case);
+        Task Update(CaseEntity @case);
+        Task Delete(int id);
+        Task<CaseEntity> GetById(int id);
+        Task<CaseEntity> GetByName(string name);
     }
 }

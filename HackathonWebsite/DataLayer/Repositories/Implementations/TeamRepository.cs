@@ -7,25 +7,35 @@ namespace HackathonWebsite.DataLayer.Repositories.Implementations
     {
         public async Task Create(TeamEntity team)
         {
-            context.Teams.AddAsync(team);
-            await context.SaveChangesAsync();
+            await context
+                .Teams
+                .AddAsync(team);
+            await context
+                .SaveChangesAsync();
+        }
+
+        public async Task<TeamEntity> GetById(int id)
+        {
+            return await context
+                .Teams
+                .FindAsync(id);
+        }
+
+        public async Task Delete(int id)
+        {
+            var team = await GetById(id);
+            if (team is null) throw new NullReferenceException();
+            context
+                .Teams
+                .Remove(team);
+            await context
+                .SaveChangesAsync();
         }
 
         public async Task Update(TeamEntity team)
         {
-           context.Teams.Update(team);
-           await context.SaveChangesAsync();
-        }
-
-        public async Task<TeamEntity?> GetById(int id)
-        {
-            return await context.Teams.FindAsync(id);
-        }
-
-        public async Task Delete(TeamEntity team)
-        {
-            context.Teams.Remove(team);
-            await context.SaveChangesAsync();
+            if (team is not null) context.Teams.Update(team);
+            else throw new NullReferenceException($"Не существует хакатона с айди {team.Id}");
         }
     }
 }

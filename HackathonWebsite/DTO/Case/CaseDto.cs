@@ -8,6 +8,6 @@ namespace HackathonWebsite.DTO.Case
         public string Title { get; set; } = "Default Title";
         public string Description { get; set; } = "Default Description";
         public string Author { get; set; } = "Default Author";
-        public int? HackathonId { get; set; }
+        public int HackathonId { get; set; }
     }
 }

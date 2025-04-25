@@ -5,18 +5,18 @@ namespace HackathonWebsite.Mapper
 {
     public static class HackatonMapper
     {
-        public static HackathonEntity HackathonDtoToEntity(HackatonDto dto)
+        public static HackathonEntity HackathonToEntity(HackatonDto dto)
         {
-            return new HackathonEntity() 
+            return new HackathonEntity 
             {
                 Description = dto.Description,
                 Title = dto.Title
             };
         }
 
-        public static HackatonDto HackathonEntityToDto(HackathonEntity entity)
+        public static HackatonDto HackathonToDto(HackathonEntity entity)
         {
-            return new HackatonDto()
+            return new HackatonDto
             {
                 Id = entity.Id,
                 Description = entity.Description,

@@ -6,8 +6,11 @@
         public string Title { get; set; }
         public string Description { get; set; }
         public string Link { get; set; }
-        public int LeaderId { get; set; }
+        public int? LeaderId { get; set; }
         public int CaseId { get; set; }
+        
+        public string GitHubLink { get; set; }
+        public string GoogleDiskLink { get; set; }
 
         public virtual UserEntity Leader { get; set; }
         public virtual CaseEntity Case { get; set; }

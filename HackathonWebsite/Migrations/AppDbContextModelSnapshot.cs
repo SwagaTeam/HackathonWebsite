@@ -175,7 +175,15 @@ namespace HackathonWebsite.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("LeaderId")
+                    b.Property<string>("GitHubLink")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("GoogleDiskLink")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int?>("LeaderId")
                         .HasColumnType("integer");
 
                     b.Property<string>("Link")
@@ -297,9 +305,7 @@ namespace HackathonWebsite.Migrations
 
                     b.HasOne("HackathonWebsite.DataLayer.Entities.UserEntity", "Leader")
                         .WithOne()
-                        .HasForeignKey("HackathonWebsite.DataLayer.Entities.TeamEntity", "LeaderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("HackathonWebsite.DataLayer.Entities.TeamEntity", "LeaderId");
 
                     b.Navigation("Case");
 
