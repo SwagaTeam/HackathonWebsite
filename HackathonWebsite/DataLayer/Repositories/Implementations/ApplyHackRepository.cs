@@ -24,12 +24,12 @@ namespace HackathonWebsite.DataLayer.Repositories.Implementations
             }
         }
 
-        public async Task<int> CreateApply(ApplyToHackEntity dto)
+        public async Task<int> CreateApply(ApplyToHackEntity entity)
         {
-            await dbContext.ApplyToHacks.AddAsync(dto);
+            await dbContext.ApplyToHacks.AddAsync(entity);
             await dbContext.SaveChangesAsync();
 
-            return dto.Id;
+            return entity.Id;
 
         }
 

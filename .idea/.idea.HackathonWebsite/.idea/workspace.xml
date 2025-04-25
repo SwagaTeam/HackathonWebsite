@@ -10,7 +10,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="539c12ef-f92d-49a7-a026-5e478e2514fd" name="Changes" comment="" />
+    <list default="true" id="539c12ef-f92d-49a7-a026-5e478e2514fd" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.HackathonWebsite/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.HackathonWebsite/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HackathonWebsite/BusinessLayer/Services/ApplyService/ApplyService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/HackathonWebsite/BusinessLayer/Services/ApplyService/ApplyService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HackathonWebsite/BusinessLayer/Services/ApplyService/IApplyService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/HackathonWebsite/BusinessLayer/Services/ApplyService/IApplyService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HackathonWebsite/Controllers/Team/TeamController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/HackathonWebsite/Controllers/Team/TeamController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HackathonWebsite/DataLayer/Entities/ApplyToTeamEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/HackathonWebsite/DataLayer/Entities/ApplyToTeamEntity.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HackathonWebsite/DataLayer/Repositories/Abstractions/IApplyHackRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/HackathonWebsite/DataLayer/Repositories/Abstractions/IApplyHackRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HackathonWebsite/DataLayer/Repositories/Abstractions/IApplyTeamRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/HackathonWebsite/DataLayer/Repositories/Abstractions/IApplyTeamRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HackathonWebsite/DataLayer/Repositories/Implementations/ApplyHackRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/HackathonWebsite/DataLayer/Repositories/Implementations/ApplyHackRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HackathonWebsite/DataLayer/Repositories/Implementations/ApplyTeamRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/HackathonWebsite/DataLayer/Repositories/Implementations/ApplyTeamRepository.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -31,10 +41,10 @@
     &quot;accountId&quot;: &quot;e8fd6cec-1943-4a3b-80d0-1d016a51c947&quot;
   }
 }</component>
-  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
-  <component name="KubernetesApiProvider"><![CDATA[{
-  "isMigrated": true
-}]]></component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
@@ -45,19 +55,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Launch Settings Profile.HackathonWebsite: https.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="RunManager" selected="Docker.HackathonWebsite/Dockerfile">
+}</component>
+  <component name="RunManager" selected=".NET Launch Settings Profile.HackathonWebsite: https">
     <configuration name="HackathonWebsite: IIS Express" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/HackathonWebsite/HackathonWebsite.csproj" />
       <option name="LAUNCH_PROFILE_TFM" value="net8.0" />
@@ -133,6 +145,7 @@
       <updated>1745562152536</updated>
       <workItem from="1745562154001" duration="2453000" />
       <workItem from="1745564648649" duration="3245000" />
+      <workItem from="1745603144830" duration="3337000" />
     </task>
     <task id="LOCAL-00001" summary="Сделал аунтефикацию + валидацию для регстрации юзера.">
       <option name="closed" value="true" />

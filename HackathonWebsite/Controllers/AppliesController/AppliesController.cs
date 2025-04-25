@@ -1,27 +1,40 @@
 ﻿using HackathonWebsite.BusinessLayer.Services.ApplyService;
 using HackathonWebsite.BusinessLayer.Services.AuthService;
+using HackathonWebsite.BusinessLayer.Services.MailService;
 using HackathonWebsite.DTO;
 using HackathonWebsite.DTO.Auth;
+using HackathonWebsite.Mapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HackathonWebsite.Controllers.AppliesController
 {
     [ApiController]
     [Route("applies")]
-    public class AppliesController(IApplyService applyService, IAuthService authService) : ControllerBase
+    public class AppliesController(IApplyService applyService, IAuthService authService, IEmailSender emailSender) : ControllerBase
     {
         [HttpGet("hackaton-applies/get")]
         public async Task<IActionResult> GetHackApplies()
         {
             var role = authService.GetCurrentUserRoles();
 
-            if (role == Roles.ADMIN)
-            {
-                var applies = applyService.GetApplyToHack();
-                return Ok(applies);
-            }
+            if (role != Roles.ADMIN) return Unauthorized("Not enough permissions");
+            var applies = await applyService.GetApplyToHack();
+            return Ok(applies);
 
-            return Unauthorized("Not enough permissions");
+        }
+
+        [HttpPost("team-applies/send-invite/{applyId}")]
+        public async Task<IActionResult> SendInvite(int applyId)
+        {
+            var apply = await applyService.GetApplyToTeamById(applyId);
+            var team = apply.Team;
+            var user = apply.User;
+            var email = user.Email;
+            var link = $"{Request.Scheme}://{Request.Host}/team/invite/{team.Link}";
+            var canSend = await applyService.SendInvite(email, link, TeamMapper.TeamToDto(team));
+            if (!canSend) throw new Exception("Сообщение не отправилось");
+            return Ok(canSend);
         }
 
         [HttpPost("create-hack-apply")]
