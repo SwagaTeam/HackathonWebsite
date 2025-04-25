@@ -10,7 +10,14 @@ namespace HackathonWebsite.Controllers.UserController
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUser(int id) 
         {
-            return Ok(await userService.GetById(id));
+            try
+            {
+                return Ok(await userService.GetById(id));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
