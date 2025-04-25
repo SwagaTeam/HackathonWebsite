@@ -8,7 +8,7 @@
         public string Email { get; set; }
         public string Telegram { get; set; }
         public string Password { get; set; }
-        public string Salt { get; set; }
+        public Guid Salt { get; set; }
 
         public int? TeamId { get; set; }
         public virtual TeamEntity? Team { get; set; }

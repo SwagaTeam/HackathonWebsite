@@ -36,7 +36,7 @@ public class AuthController(IAuthService authService, ILogger<AuthController> lo
         catch (Exception ex)
         {
             logger.LogError(ex.Message);
-            return BadRequest("Registration failed");
+            return BadRequest(ex.Message);
         }
     }
     

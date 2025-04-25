@@ -5,7 +5,7 @@ namespace HackathonWebsite.Mapper;
 
 public class UserMapper
 {
-    public static UserAuthDto UserToUserAuthDto(UserEntity user)
+    public static UserAuthDto UserToDto(UserEntity user)
     {
         return new UserAuthDto
         {
@@ -19,7 +19,7 @@ public class UserMapper
         };
     }
 
-    public static UserEntity UserAuthDtoToUserEntity(UserAuthDto userAuthDto)
+    public static UserEntity UserToEntity(UserAuthDto userAuthDto)
     {
         return new UserEntity
         {
