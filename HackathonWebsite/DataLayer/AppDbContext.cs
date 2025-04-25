@@ -49,9 +49,9 @@ namespace HackathonWebsite.DataLayer
                 .HasForeignKey(x=>x.CaseId);
 
             modelBuilder.Entity<ApplyToHackEntity>()
-                .HasOne(h => h.User)
+                .HasOne(h => h.Team)
                 .WithMany(u => u.AppliesToHack)
-                .HasForeignKey(x => x.UserId);
+                .HasForeignKey(x => x.TeamId);
 
             modelBuilder.Entity<ApplyToHackEntity>()
                 .HasOne(h => h.Case)

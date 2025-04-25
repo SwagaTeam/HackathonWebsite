@@ -15,6 +15,7 @@
         public virtual UserEntity Leader { get; set; }
         public virtual CaseEntity Case { get; set; }
         public virtual ICollection<ApplyToTeamEntity> AppliesToTeam { get; set; }
+        public virtual ICollection<ApplyToHackEntity> AppliesToHack { get; set; }
         public virtual ICollection<UserEntity> Participants { get; set; } = new List<UserEntity>();
     }
 }

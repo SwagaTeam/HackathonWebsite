@@ -14,6 +14,5 @@
         public int? TeamId { get; set; }
         public virtual TeamEntity? Team { get; set; }
         public virtual ICollection<ApplyToTeamEntity> AppliesToTeam { get; set; }
-        public virtual ICollection<ApplyToHackEntity> AppliesToHack { get; set; }
     }
 }

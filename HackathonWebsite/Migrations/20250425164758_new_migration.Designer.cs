@@ -2,6 +2,7 @@
 using HackathonWebsite.DataLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HackathonWebsite.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250425164758_new_migration")]
+    partial class new_migration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,14 +67,14 @@ namespace HackathonWebsite.Migrations
                     b.Property<bool>("IsApplied")
                         .HasColumnType("boolean");
 
-                    b.Property<int>("TeamId")
+                    b.Property<int>("UserId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CaseId");
 
-                    b.HasIndex("TeamId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("ApplyToHacks");
                 });
@@ -260,7 +263,7 @@ namespace HackathonWebsite.Migrations
 
                     b.HasOne("HackathonWebsite.DataLayer.Entities.TeamEntity", "Team")
                         .WithMany("AppliesToHack")
-                        .HasForeignKey("TeamId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

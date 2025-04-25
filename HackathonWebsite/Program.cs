@@ -16,8 +16,6 @@ using HackathonWebsite.BusinessLayer.Services.UserService;
 using HackathonWebsite.DataLayer.Repositories.Abstractions;
 using HackathonWebsite.DataLayer.Repositories.Implementations;
 using HackathonWebsite.Middleware;
-using HackathonWebsite.BusinessLayer.Services.CaseService;
-using HackathonWebsite.BusinessLayer.Services.HackathonService;
 using HackathonWebsite.BusinessLayer.Services.MailService;
 
 namespace HackathonWebsite
