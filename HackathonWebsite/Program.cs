@@ -6,6 +6,12 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Security.Claims;
 using System.Text;
+using HackathonWebsite.BusinessLayer.Services.AuthService;
+using HackathonWebsite.BusinessLayer.Services.AuthService.Abstractions;
+using HackathonWebsite.BusinessLayer.Services.AuthService.Implementations;
+using HackathonWebsite.BusinessLayer.Services.UserService;
+using HackathonWebsite.DataLayer.Repositories.Implementations;
+using HackathonWebsite.Middleware;
 
 namespace HackathonWebsite
 {
@@ -18,19 +24,20 @@ namespace HackathonWebsite
             // Add services to the container.
 
             ConfigureServices(builder.Services, builder.Configuration);
-
+            await Console.Out.WriteLineAsync(builder.Configuration["Jwt:Key"]);
             var app = builder.Build();
 
             using var scope = app.Services.CreateScope();
             using var appDbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
             await DbContextInitializer.Migrate(appDbContext);
-
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseMiddleware<JwtBlacklistMiddleware>();
 
             app.UseHttpsRedirection();
 
@@ -47,6 +54,12 @@ namespace HackathonWebsite
         {
             services.AddControllers();
             services.AddEndpointsApiExplorer();
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IEncrypt, Encrypt>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSingleton<IBlackListService, BlackListService>();
 
             services.AddCors(options =>
             {
@@ -97,7 +110,7 @@ namespace HackathonWebsite
 
                 options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
-                    Description = "Введите 'Bearer' [пробел] для авторизации",
+                    Description = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 'Bearer' [пїЅпїЅпїЅпїЅпїЅпїЅ] пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                     Name = "Authorization",
                     In = ParameterLocation.Header,
                     Type = SecuritySchemeType.ApiKey

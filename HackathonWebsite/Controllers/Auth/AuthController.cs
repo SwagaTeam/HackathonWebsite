@@ -8,6 +8,7 @@ namespace HackathonWebsite.Controllers.Auth;
 [Route("auth")]
 public class AuthController(IAuthService authService, ILogger<AuthController> logger) : ControllerBase
 {
+    [HttpGet("get-current-user")]
     public async Task<IActionResult> GetCurrentUser()
     {
         try
@@ -22,7 +23,8 @@ public class AuthController(IAuthService authService, ILogger<AuthController> lo
             return BadRequest(ex.Message);
         }
     }
-
+    
+    [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] UserAuthDto user)
     {
         try
@@ -37,7 +39,8 @@ public class AuthController(IAuthService authService, ILogger<AuthController> lo
             return BadRequest("Registration failed");
         }
     }
-
+    
+    [HttpPost("login")]
     public async Task<IActionResult> Login(string email, string password)
     {
         try
@@ -57,6 +60,7 @@ public class AuthController(IAuthService authService, ILogger<AuthController> lo
         }
     }
 
+    [HttpPost("logout")]
     public IActionResult Logout()
     {
         var token = authService.GetToken();
