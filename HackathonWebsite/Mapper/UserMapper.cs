@@ -19,7 +19,7 @@ public class UserMapper
         };
     }
 
-    public static UserEntity UserToEntity(UserAuthDto userAuthDto)
+    public static UserEntity UserToEntity(UserAuthDto userAuthDto, Guid salt)
     {
         return new UserEntity
         {
@@ -28,7 +28,8 @@ public class UserMapper
             Email = userAuthDto.Email,
             Password = userAuthDto.Password,
             TeamId = userAuthDto.TeamId,
-            Telegram = userAuthDto.Telegram
+            Telegram = userAuthDto.Telegram,
+            Salt = salt
         };
     }
 }

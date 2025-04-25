@@ -25,8 +25,9 @@ public class AuthService(
         var result = await validator.ValidateAsync(user);
         if (!result.IsValid) 
             throw new ArgumentException(string.Join(", ", result.Errors.Select(e => e.ErrorMessage)));
-        user.Password = encrypt.HashPassword(user.Password, new Guid());
-        await repository.Create(UserMapper.UserToEntity(user));
+        var salt = Guid.NewGuid();
+        user.Password = encrypt.HashPassword(user.Password, salt);
+        await repository.Create(UserMapper.UserToEntity(user, salt));
         return (int)user.Id!;
     }
 
