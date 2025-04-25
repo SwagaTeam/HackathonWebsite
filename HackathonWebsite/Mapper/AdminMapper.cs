@@ -18,7 +18,7 @@ public class AdminMapper
     {
         return new AdminEntity
         {
-            Id = adminAuthDto.Id,
+            Id = (int)adminAuthDto.Id,
             Nickname = adminAuthDto.Nickname,
             Password = adminAuthDto.Password,
             Salt = salt
