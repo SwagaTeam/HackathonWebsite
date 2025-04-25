@@ -25,6 +25,11 @@ namespace HackathonWebsite.DataLayer.Repositories.Implementations
             }
         }
 
+        public async Task<ICollection<HackathonEntity>> Get()
+        {
+            return await dbContext.Hackathons.ToListAsync();
+        }
+
         public async Task<HackathonEntity> GetActiveHackaton()
         {
             var hackaton = await dbContext.Hackathons.FirstOrDefaultAsync(x=>x.IsActive);
