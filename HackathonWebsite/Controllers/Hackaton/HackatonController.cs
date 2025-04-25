@@ -39,5 +39,17 @@ namespace HackathonWebsite.Controllers.Hackaton
         {
             return await hackathonService.GetByName(name);
         }
+
+        [HttpGet("get/active")]
+        public async Task<IActionResult> GetActiveHackaton()
+        {
+            return Ok(await hackathonService.GetActiveHackaton());
+        }
+
+        [HttpGet("set/active/{id}")]
+        public async Task<IActionResult> GetActiveHackaton(int id)
+        {
+            return Ok(await hackathonService.SetActiveHackaton(id));
+        }
     }
 }

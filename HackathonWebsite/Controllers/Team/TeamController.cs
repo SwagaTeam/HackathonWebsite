@@ -59,4 +59,34 @@ public class TeamController(
 
         return Ok($"Вы добавлены в команду {existingTeam.Title}!");
     }
+
+    [HttpPost("add-github")]
+    public async Task<IActionResult> AddGithubLink([FromBody]string link)
+    {
+        var currentUserId = authService.GetCurrentUserId();
+
+        if (currentUserId == -1)
+            return Unauthorized("Not authorized");
+
+        var team = await teamService.GetByUser((int)currentUserId!);
+
+        await teamService.AddGithubLink(team.Id, link);
+
+        return Ok($"Ссылка добавлена");
+    }
+
+    [HttpPost("add-google")]
+    public async Task<IActionResult> AddGoogleLink(string link)
+    {
+        var currentUserId = authService.GetCurrentUserId();
+
+        if (currentUserId == -1)
+            return Unauthorized("Not authorized");
+
+        var team = await teamService.GetByUser((int)currentUserId!);
+
+        await teamService.AddGoogleLink(team.Id, link);
+
+        return Ok($"Ссылка добавлена");
+    }
 }

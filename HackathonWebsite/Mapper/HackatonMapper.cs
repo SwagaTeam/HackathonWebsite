@@ -10,7 +10,8 @@ namespace HackathonWebsite.Mapper
             return new HackathonEntity 
             {
                 Description = dto.Description,
-                Title = dto.Title
+                Title = dto.Title, 
+                IsActive = dto.IsActive
             };
         }
 
@@ -20,7 +21,8 @@ namespace HackathonWebsite.Mapper
             {
                 Id = entity.Id,
                 Description = entity.Description,
-                Title = entity.Title
+                Title = entity.Title,
+                IsActive = entity.IsActive
             };
         }
     }

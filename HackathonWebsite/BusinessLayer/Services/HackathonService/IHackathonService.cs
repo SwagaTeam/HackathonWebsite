@@ -9,5 +9,8 @@ namespace HackathonWebsite.BusinessLayer.Services.HackathonService
         Task<int> Delete(int id);
         Task<HackatonDto> GetById(int id);
         Task<HackatonDto> GetByName(string name);
+
+        Task<HackatonDto> GetActiveHackaton();
+        Task<int> SetActiveHackaton(int id);
     }
 }
