@@ -190,14 +190,6 @@ namespace HackathonWebsite.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("LinkToGithub")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("LinkToGoogleDisk")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("text");

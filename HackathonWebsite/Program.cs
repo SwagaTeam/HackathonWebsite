@@ -72,14 +72,18 @@ namespace HackathonWebsite
             services.AddScoped<ICaseService, CaseService>();
             services.AddScoped<IHackathonService, HackathonService>();
             services.AddScoped<IAdminRepository, AdminRepository>();
-            services.AddScoped<IEmailSender, EmailSender>();
 
+            services.AddScoped<IEmailSender, EmailSender>();
             services.AddTransient<IMailService, MailService>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IBlackListService, BlackListService>();
             services.AddScoped<ITeamService, TeamService>();
             services.AddScoped<ITeamRepository, TeamRepository>();
+
+            services.Configure<MailSettings>(
+                configuration.GetSection(nameof(MailSettings))
+            );
 
 
             services.AddCors(options =>

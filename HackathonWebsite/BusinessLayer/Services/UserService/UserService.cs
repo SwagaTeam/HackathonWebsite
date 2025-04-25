@@ -9,4 +9,9 @@ public class UserService(IUserRepository repository) : IUserService
     {
         return await repository.GetByEmail(email);
     }
+
+    public async Task<UserEntity> GetById(int id)
+    {
+        return await repository.GetById(id);
+    }
 }

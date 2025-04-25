@@ -14,7 +14,7 @@
                 subject: subject,
                 body: message,
                 from: "TestMessagesService@yandex.ru",
-                displayName: "TaskBoard",
+                displayName: "Hackaton",
                 bcc: new List<string> { "TestMessagesService@yandex.ru" },
                 cc: new List<string> { "TestMessagesService@yandex.ru" }
             );

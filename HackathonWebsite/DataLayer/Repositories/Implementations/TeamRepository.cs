@@ -5,13 +5,11 @@ namespace HackathonWebsite.DataLayer.Repositories.Implementations
 {
     public class TeamRepository(AppDbContext context) : ITeamRepository
     {
-        public async Task Create(TeamEntity team)
+        public async Task<int> Create(TeamEntity team)
         {
-            await context
-                .Teams
-                .AddAsync(team);
-            await context
-                .SaveChangesAsync();
+            await context.Teams.AddAsync(team);
+            await context.SaveChangesAsync();
+            return team.Id;
         }
 
         public async Task<TeamEntity> GetById(int id)
@@ -34,8 +32,40 @@ namespace HackathonWebsite.DataLayer.Repositories.Implementations
 
         public async Task Update(TeamEntity team)
         {
-            if (team is not null) context.Teams.Update(team);
-            else throw new NullReferenceException($"Не существует хакатона с айди {team.Id}");
+            if (team is not null)
+            {
+                context.Teams.Update(team);
+                await context.SaveChangesAsync();
+            }
+            else throw new NullReferenceException($"Не существует команды с айди {team.Id}");
+        }
+
+        public async Task<TeamEntity?> GetByLeadId(int id)
+        {
+            var team = await context.Teams.FirstOrDefaultAsync(x => x.LeaderId == id);
+            if (team is not null)
+                return team;
+            throw new NullReferenceException($"Не существует команды с айди {team.Id}");
+        }
+
+        public async Task<TeamEntity?> GetByLink(string link)
+        {
+            var team = await context.Teams.FirstOrDefaultAsync(x => x.Link == link);
+            if (team is not null)
+                return team;
+            throw new NullReferenceException($"Не существует команды с такой ссылкой");
+        }
+
+        public async Task AddInTeam(int teamId, int userId)
+        {
+            var team = await context.Teams.Include(x => x.Participants).FirstOrDefaultAsync(x=>x.Id == teamId);
+            var user = await context.Users.FindAsync(userId);
+
+            if (team is null || user is null) 
+                throw new NullReferenceException($"Не существует команды с айди {team.Id}");
+
+            team.Participants.Add(user);
+            await context.SaveChangesAsync();
         }
     }
 }

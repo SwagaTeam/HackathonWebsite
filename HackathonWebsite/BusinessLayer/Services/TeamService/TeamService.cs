@@ -1,12 +1,13 @@
 ﻿using HackathonWebsite.BusinessLayer.Services.AuthService;
 using HackathonWebsite.BusinessLayer.Services.CaseService;
+using HackathonWebsite.BusinessLayer.Services.UserService;
 using HackathonWebsite.DataLayer.Repositories.Implementations;
 using HackathonWebsite.Dto.Team;
 using HackathonWebsite.Mapper;
 
 namespace HackathonWebsite.BusinessLayer.Services.TeamService
 {
-    public class TeamService(ITeamRepository repository, ICaseService caseService, IAuthService authService) : ITeamService
+    public class TeamService(ITeamRepository repository, ICaseService caseService, IAuthService authService, IUserService userService) : ITeamService
     {
         public async Task<int> Create(TeamDto team)
         {
@@ -14,9 +15,13 @@ namespace HackathonWebsite.BusinessLayer.Services.TeamService
             if (@case is null) throw new NullReferenceException("Нельзя создать команду под несуществующий кейс");
             var currentId = authService.GetCurrentUserId();
             team.LeaderId = currentId;
+            team.Link = Guid.NewGuid().ToString();
             var teamEntity = TeamMapper.TeamToEntity(team);
-            await repository.Create(teamEntity);
-            return team.Id;
+            var id = await repository.Create(teamEntity);
+
+            await AddInTeam(id, (int)currentId!);
+
+            return id;
         }
 
         public async Task<int> Update(TeamDto team)
@@ -33,6 +38,23 @@ namespace HackathonWebsite.BusinessLayer.Services.TeamService
         public async Task CheckInvites()
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<TeamDto> GetByLeadId(int id)
+        {
+            var team = await repository.GetByLeadId(id);
+            return TeamMapper.TeamToDto(team);
+        }
+
+        public async Task<TeamDto> GetByLink(string link)
+        {
+            var team = await repository.GetByLink(link);
+            return TeamMapper.TeamToDto(team);
+        }
+
+        public async Task AddInTeam(int teamId, int userId)
+        {
+            await repository.AddInTeam(teamId, userId);
         }
     }
 }
