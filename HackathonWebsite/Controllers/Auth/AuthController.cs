@@ -41,6 +41,22 @@ public class AuthController(IAuthService authService, ILogger<AuthController> lo
             return BadRequest("Registration failed " + ex.Message);
         }
     }
+
+    [HttpPost("admin-register")]
+    public async Task<IActionResult> AdminRegister([FromBody] AdminAuthDto user)
+    {
+        try
+        {
+            var userId = await authService.AdminRegister(user);
+            logger.LogInformation($"REGISTER: A new User with id \"{userId}\" has been created.");
+            return Ok(userId);
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex.Message);
+            return BadRequest("Registration failed " + ex.Message);
+        }
+    }
     
     [HttpPost("login")]
     public async Task<IActionResult> Login(string email, string password)
@@ -49,7 +65,27 @@ public class AuthController(IAuthService authService, ILogger<AuthController> lo
         {
             if (authService.GetCurrentUserId() != -1)
                 throw new UnauthorizedAccessException("You are already logged in");
-            var user = await authService.Login(email, password);
+            var user = await authService.Login(email, password, false);
+            if (user is null) return Unauthorized("Invalid number/password");
+            var token = authService.GenerateJwtToken(user);
+            logger.LogInformation($"LOGGED IN: Token {token}");
+            return Ok(new { token });
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex.Message);
+            return BadRequest(ex.Message);
+        }
+    }
+    
+    [HttpPost("admin-login")]
+    public async Task<IActionResult> AdminLogin(string nickName, string password)
+    {
+        try
+        {
+            if (authService.GetCurrentUserId() != -1)
+                throw new UnauthorizedAccessException("You are already logged in");
+            var user = await authService.Login(nickName, password, true);
             if (user is null) return Unauthorized("Invalid number/password");
             var token = authService.GenerateJwtToken(user);
             logger.LogInformation($"LOGGED IN: Token {token}");

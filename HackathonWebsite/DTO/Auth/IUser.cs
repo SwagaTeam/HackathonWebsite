@@ -1,7 +1,4 @@
-﻿namespace HackathonWebsite.DTO.Auth
+﻿public interface IUser
 {
-    public interface IUser
-    {
-        string UniqueId { get; }
-    }
+    string UniqueId { get; }
 }

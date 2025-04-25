@@ -8,9 +8,6 @@ namespace HackathonWebsite.DataLayer.Repositories.Implementations
     {
         public async Task Create(UserEntity user)
         {
-            user.Salt = Guid.NewGuid().ToString();
-            user.Password = encrypt.HashPassword(user.Password, user.Salt);
-
             await context
                 .Users
                 .AddAsync(user);

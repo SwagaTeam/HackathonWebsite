@@ -10,6 +10,7 @@ using HackathonWebsite.BusinessLayer.Services.AuthService;
 using HackathonWebsite.BusinessLayer.Services.AuthService.Abstractions;
 using HackathonWebsite.BusinessLayer.Services.AuthService.Implementations;
 using HackathonWebsite.BusinessLayer.Services.UserService;
+using HackathonWebsite.DataLayer.Repositories.Abstractions;
 using HackathonWebsite.DataLayer.Repositories.Implementations;
 using HackathonWebsite.Middleware;
 
@@ -58,6 +59,7 @@ namespace HackathonWebsite
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IEncrypt, Encrypt>();
+            services.AddScoped<IAdminRepository, AdminRepository>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IBlackListService, BlackListService>();
 
