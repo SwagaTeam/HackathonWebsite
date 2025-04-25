@@ -1,12 +1,16 @@
-﻿using HackathonWebsite.DataLayer.Entities;
+﻿using HackathonWebsite.BusinessLayer.Services.AuthService.Abstractions;
+using HackathonWebsite.DataLayer.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace HackathonWebsite.DataLayer.Repositories.Implementations
 {
-    internal class UserRepository(AppDbContext context) : IUserRepository
+    internal class UserRepository(AppDbContext context, IEncrypt encrypt) : IUserRepository
     {
         public async Task Create(UserEntity user)
         {
+            user.Salt = Guid.NewGuid().ToString();
+            user.Password = encrypt.HashPassword(user.Password, user.Salt);
+
             await context
                 .Users
                 .AddAsync(user);

@@ -1,4 +1,6 @@
-﻿namespace HackathonWebsite.DTO.Auth.UserAuth;
+﻿using System.ComponentModel;
+
+namespace HackathonWebsite.DTO.Auth.UserAuth;
 
 public class UserAuthDto : IUser
 {
@@ -8,6 +10,8 @@ public class UserAuthDto : IUser
     public string Email { get; set; }
     public string Telegram { get; set; }
     public string Password { get; set; }
+
+    [DefaultValue(null)]
     public int? TeamId { get; set; }
 
     public string UniqueId => Id.ToString();

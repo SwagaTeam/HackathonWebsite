@@ -37,6 +37,12 @@ public class AuthService(
             : null!;
     }
 
+    public List<string> GetCurrentUserRoles()
+    {
+        var claimsIdentity = httpContextAccessor.HttpContext?.User.Identity as ClaimsIdentity;
+        return claimsIdentity?.FindAll(ClaimTypes.Role).Select(claim => claim.Value).ToList() ?? new List<string>();
+    }
+
     public int? GetCurrentUserId()
     {
         var claimsIdentity = httpContextAccessor.HttpContext?.User.Identity as ClaimsIdentity;
