@@ -1,32 +1,33 @@
-﻿using HackathonWebsite.DTO.Hackaton;
+﻿using HackathonWebsite.DataLayer.Repositories.Implementations;
+using HackathonWebsite.DTO.Hackaton;
 
 namespace HackathonWebsite.BusinessLayer.Services.HackathonService
 {
-    public class HackathonService : IHackathonService
+    public class HackathonService(IHackathonRepository hackathonRepository) : IHackathonService
     {
-        public Task<int> Create(HackatonDto hackaton)
+        public async Task<int> Create(HackatonDto hackaton)
         {
-            throw new NotImplementedException();
+            return await hackathonRepository.Create(hackaton);
         }
 
-        public Task<int> Delete(HackatonDto hackaton)
+        public async Task<int> Delete(int id)
         {
-            throw new NotImplementedException();
+            return await hackathonRepository.Delete(id);
         }
 
-        public Task<HackatonDto> GetById(int id)
+        public async Task<HackatonDto> GetById(int id)
         {
-            throw new NotImplementedException();
+            return await hackathonRepository.GetById(id);
         }
 
-        public Task<HackatonDto> GetByName(string name)
+        public async Task<HackatonDto> GetByName(string name)
         {
-            throw new NotImplementedException();
+            return await hackathonRepository.GetByName(name);
         }
 
-        public Task<int> Update(HackatonDto hackaton)
+        public async Task<int> Update(HackatonDto hackaton)
         {
-            throw new NotImplementedException();
+            return await hackathonRepository.Update(hackaton);
         }
     }
 }
