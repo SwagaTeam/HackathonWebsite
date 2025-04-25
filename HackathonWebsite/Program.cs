@@ -19,11 +19,6 @@ namespace HackathonWebsite
 
             ConfigureServices(builder.Services, builder.Configuration);
 
-            builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
-
             var app = builder.Build();
 
             using var scope = app.Services.CreateScope();
@@ -39,8 +34,9 @@ namespace HackathonWebsite
 
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
+            app.UseAuthentication();
 
+            app.UseAuthorization();
 
             app.MapControllers();
 

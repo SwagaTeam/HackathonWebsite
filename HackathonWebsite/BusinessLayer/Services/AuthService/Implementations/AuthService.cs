@@ -4,6 +4,9 @@ using System.Text;
 using HackathonWebsite.BusinessLayer.Services.AuthService.Abstractions;
 using HackathonWebsite.DataLayer.Repositories.Implementations;
 using HackathonWebsite.DTO;
+using HackathonWebsite.DTO.Auth;
+using HackathonWebsite.DTO.Auth.AdminAuth;
+using HackathonWebsite.DTO.Auth.UserAuth;
 using HackathonWebsite.Mapper;
 using Microsoft.IdentityModel.Tokens;
 
@@ -23,7 +26,7 @@ public class AuthService(
         if (!result.IsValid) 
             throw new ArgumentException(string.Join(", ", result.Errors.Select(e => e.ErrorMessage)));
         await repository.Create(UserMapper.UserAuthDtoToUserEntity(user));
-        return user.Id;
+        return (int)user.Id!;
     }
 
     public async Task<UserAuthDto> Login(string email, string password)
@@ -31,7 +34,7 @@ public class AuthService(
         var user = await repository.GetByEmail(email);
         return user is not null && user.Password == encrypt.HashPassword(password, user.Salt)
             ? UserMapper.UserToUserAuthDto(user)
-            : null;
+            : null!;
     }
 
     public int? GetCurrentUserId()
@@ -45,12 +48,19 @@ public class AuthService(
     {
         var userRoles = new List<string>();
 
-        userRoles.Add("USER");
+        if (user is UserAuthDto userAuth)
+            userRoles.Add(Roles.USER);
+        else if (user is AdminAuthDto admin)
+        {
+            userRoles.Add(Roles.ADMIN);
+        }
+        else
+            throw new ArgumentException("Неподдерживаемый тип пользователя");
 
         var claims = new List<Claim>
         {
-            new Claim(JwtRegisteredClaimNames.Sub, (user as UserAuthDto)?.Id.ToString() ?? string.Empty),
-            new Claim(ClaimTypes.NameIdentifier, (user as UserAuthDto)?.Id.ToString() ?? string.Empty),
+            new Claim(JwtRegisteredClaimNames.Sub, (user as IUser)?.UniqueId ?? string.Empty),
+            new Claim(ClaimTypes.NameIdentifier, (user as IUser)?.UniqueId.ToString() ?? string.Empty),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
         };
 

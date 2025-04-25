@@ -1,5 +1,5 @@
 ﻿using HackathonWebsite.BusinessLayer.Services.AuthService;
-using HackathonWebsite.DTO;
+using HackathonWebsite.DTO.Auth.UserAuth;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HackathonWebsite.Controllers.Auth;

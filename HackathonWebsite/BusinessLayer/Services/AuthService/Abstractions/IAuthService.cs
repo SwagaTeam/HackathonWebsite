@@ -1,4 +1,4 @@
-﻿using HackathonWebsite.DTO;
+﻿using HackathonWebsite.DTO.Auth.UserAuth;
 
 namespace HackathonWebsite.BusinessLayer.Services.AuthService
 {

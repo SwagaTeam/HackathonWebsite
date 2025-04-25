@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace HackathonWebsite.DTO;
+namespace HackathonWebsite.DTO.Auth.UserAuth;
 
 public class UserRegisterValidator : AbstractValidator<UserAuthDto>
 {
@@ -9,11 +9,11 @@ public class UserRegisterValidator : AbstractValidator<UserAuthDto>
     {
         RuleFor(u => u.FullName)
             .NotEmpty().WithMessage("Полное имя обязательно для заполнения")
-            .Length(2, 50).WithMessage("Полное имя должно быть от 3 до 50 символов"); 
-        
+            .Length(2, 50).WithMessage("Полное имя должно быть от 3 до 50 символов");
+
         RuleFor(u => u.Telegram)
-            .NotEmpty().WithMessage("Telegram обязателен для заполнения") 
-            .Length(2, 50).WithMessage("Telegram должен быть от 3 до 50 символов"); 
+            .NotEmpty().WithMessage("Telegram обязателен для заполнения")
+            .Length(2, 50).WithMessage("Telegram должен быть от 3 до 50 символов");
 
         //добавить проверку на существование комманды если вводят
         RuleFor(u => u.TeamId)
@@ -22,10 +22,10 @@ public class UserRegisterValidator : AbstractValidator<UserAuthDto>
 
         RuleFor(u => u.Email)
             .NotEmpty().WithMessage("Email обязателен для заполнения")
-            .EmailAddress().WithMessage("Неверный формат email"); 
+            .EmailAddress().WithMessage("Неверный формат email");
 
         RuleFor(u => u.Password)
-            .NotEmpty().WithMessage("Пароль обязателен для заполнения") 
+            .NotEmpty().WithMessage("Пароль обязателен для заполнения")
             .Length(8, 70).WithMessage("Пароль должен содержать от 8 до 70 символов") // Проверка длины пароля
             .Must(ContainUpperAndLower).WithMessage("Пароль должен содержать хотя бы одну заглавную и одну строчную букву") // Проверка на заглавные и строчные буквы
             .Must(ContainSpecialCharacter).WithMessage("Пароль должен содержать хотя бы один специальный символ: !@#$%^&*"); // Проверка на спецсимволы

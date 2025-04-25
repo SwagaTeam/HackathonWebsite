@@ -1,5 +1,5 @@
 ﻿using HackathonWebsite.DataLayer.Entities;
-using HackathonWebsite.DTO;
+using HackathonWebsite.DTO.Auth.UserAuth;
 
 namespace HackathonWebsite.Mapper;
 
@@ -23,7 +23,6 @@ public class UserMapper
     {
         return new UserEntity
         {
-            Id = userAuthDto.Id,
             FullName = userAuthDto.FullName,
             University = userAuthDto.University,
             Email = userAuthDto.Email,
