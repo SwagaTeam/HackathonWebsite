@@ -1,6 +1,7 @@
 ﻿using HackathonWebsite.BusinessLayer.Services.AuthService;
 using HackathonWebsite.BusinessLayer.Services.CaseService;
 using HackathonWebsite.BusinessLayer.Services.UserService;
+using HackathonWebsite.DataLayer.Entities;
 using HackathonWebsite.DataLayer.Repositories.Implementations;
 using HackathonWebsite.Dto.Team;
 using HackathonWebsite.Mapper;
@@ -76,6 +77,18 @@ namespace HackathonWebsite.BusinessLayer.Services.TeamService
         {
             var team = await repository.GetByUserId(id);
             return TeamMapper.TeamToDto(team!);
+        }
+
+        public async Task<ICollection<TeamEntity>> Get()
+        {
+            var teams = await repository.Get();
+            return teams;
+        }
+
+        public async Task<TeamEntity> GetById(int id)
+        {
+            var team = await repository.GetById(id);
+            return team;
         }
     }
 }

@@ -66,6 +66,10 @@ namespace HackathonWebsite.Controllers.Hackaton
         [HttpGet("get")]
         public async Task<IActionResult> Get()
         {
+            var role = authService.GetCurrentUserRoles();
+
+            if (role != Roles.ADMIN)
+                return Unauthorized();
             return Ok(await hackathonService.Get());
         }
 
@@ -78,6 +82,10 @@ namespace HackathonWebsite.Controllers.Hackaton
         [HttpPost("set/active/{id}")]
         public async Task<IActionResult> SetActiveHackaton(int id)
         {
+            var role = authService.GetCurrentUserRoles();
+
+            if (role != Roles.ADMIN)
+                return Unauthorized();
             return Ok(await hackathonService.SetActiveHackaton(id));
         }
     }

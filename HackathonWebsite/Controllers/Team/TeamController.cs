@@ -5,6 +5,7 @@ using HackathonWebsite.BusinessLayer.Services.TeamService;
 using HackathonWebsite.BusinessLayer.Services.UserService;
 using HackathonWebsite.DataLayer.Repositories.Implementations;
 using HackathonWebsite.Dto.Team;
+using HackathonWebsite.DTO.Auth;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HackathonWebsite.Controllers.Team;
@@ -78,5 +79,44 @@ public class TeamController(
         await teamService.AddGoogleLink(team.Id, link);
 
         return Ok($"—сылка добавлена");
+    }
+
+    [HttpGet("my-team")]
+    public async Task<IActionResult> GetCurrentTeam()
+    {
+        var currentUserId = authService.GetCurrentUserId();
+
+        if (currentUserId == -1)
+            return Unauthorized();
+
+        var team = teamService.GetByUser((int)currentUserId!);
+
+        return Ok(team);
+    }
+
+    [HttpGet("get/{id}")]
+    public async Task<IActionResult> GetById(int id)
+    {
+        var role = authService.GetCurrentUserRoles();
+
+        if (role != Roles.ADMIN)
+            return Unauthorized("Not enough permissions");
+
+        var team = await teamService.GetById(id);
+
+        return Ok(team);
+    }
+
+    [HttpGet("get")]
+    public async Task<IActionResult> Get()
+    {
+        var role = authService.GetCurrentUserRoles();
+
+        if (role != Roles.ADMIN)
+            return Unauthorized("Not enough permissions");
+
+        var team = await teamService.Get();
+
+        return Ok(team);
     }
 }

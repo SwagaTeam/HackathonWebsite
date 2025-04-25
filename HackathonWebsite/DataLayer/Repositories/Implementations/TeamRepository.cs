@@ -103,5 +103,10 @@ namespace HackathonWebsite.DataLayer.Repositories.Implementations
                 return team;
             throw new NullReferenceException($"Не существует команды с юзером {team.Id}");
         }
+
+        public async Task<ICollection<TeamEntity>> Get()
+        {
+            return await context.Teams.ToListAsync();
+        }
     }
 }
