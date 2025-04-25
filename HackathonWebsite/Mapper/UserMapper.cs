@@ -15,7 +15,8 @@ public class UserMapper
             TeamId = user.TeamId,
             FullName = user.FullName,
             Telegram = user.Telegram,
-            University = user.University
+            University = user.University,
+            Role = user.Role,
         };
     }
 
@@ -27,6 +28,7 @@ public class UserMapper
             University = userAuthDto.University,
             Email = userAuthDto.Email,
             Password = userAuthDto.Password,
+            Role = userAuthDto.Role,
             TeamId = userAuthDto.TeamId,
             Telegram = userAuthDto.Telegram,
             Salt = salt

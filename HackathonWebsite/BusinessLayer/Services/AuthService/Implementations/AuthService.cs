@@ -57,7 +57,7 @@ public class AuthService(
         var salt = Guid.NewGuid().ToString();
         admin.Password = encrypt.HashPassword(admin.Password, salt);
         await adminRepository.Create(AdminMapper.AdminToEntity(admin, salt));
-        return admin.Id;
+        return (int)admin.Id;
     }
     
     public string GetCurrentUserRoles()

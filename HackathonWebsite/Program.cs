@@ -16,6 +16,9 @@ using HackathonWebsite.BusinessLayer.Services.UserService;
 using HackathonWebsite.DataLayer.Repositories.Abstractions;
 using HackathonWebsite.DataLayer.Repositories.Implementations;
 using HackathonWebsite.Middleware;
+using HackathonWebsite.BusinessLayer.Services.CaseService;
+using HackathonWebsite.BusinessLayer.Services.HackathonService;
+using HackathonWebsite.BusinessLayer.Services.MailService;
 
 namespace HackathonWebsite
 {
@@ -43,6 +46,8 @@ namespace HackathonWebsite
 
             app.UseMiddleware<JwtBlacklistMiddleware>();
 
+            app.UseCors("AllowAll");
+
             app.UseHttpsRedirection();
 
             app.UseAuthentication();
@@ -67,10 +72,15 @@ namespace HackathonWebsite
             services.AddScoped<ICaseService, CaseService>();
             services.AddScoped<IHackathonService, HackathonService>();
             services.AddScoped<IAdminRepository, AdminRepository>();
+            services.AddScoped<IEmailSender, EmailSender>();
+
+            services.AddTransient<IMailService, MailService>();
+
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IBlackListService, BlackListService>();
             services.AddScoped<ITeamService, TeamService>();
             services.AddScoped<ITeamRepository, TeamRepository>();
+
 
             services.AddCors(options =>
             {
