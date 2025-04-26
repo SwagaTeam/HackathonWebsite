@@ -6,6 +6,7 @@ namespace HackathonWebsite.DataLayer.Repositories.Implementations
     {
         public Task<int> Create(TeamEntity team);
         public Task Update(TeamEntity team);
+        public Task<ICollection<TeamEntity>> Get();
         public Task<TeamEntity?> GetById(int id);
         public Task<TeamEntity?> GetByLeadId(int id);
         public Task<TeamEntity?> GetByUserId(int id);

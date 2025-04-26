@@ -1,4 +1,5 @@
 ﻿using HackathonWebsite.BusinessLayer.Services.HackathonService;
+using HackathonWebsite.DataLayer.Entities;
 using HackathonWebsite.DataLayer.Repositories.Implementations;
 using HackathonWebsite.DTO.Case;
 using HackathonWebsite.DTO.Hackaton;
@@ -10,13 +11,18 @@ namespace HackathonWebsite.BusinessLayer.Services.CaseService
     {
         public async Task<int> Create(CaseDto @case)
         {
-            var existingHackaton = await hackatonService.GetById(@case.HackathonId);
+            var existingHackaton = await hackatonService.GetById((int)@case.HackathonId!);
             if (existingHackaton is null) 
                 throw new NullReferenceException($"Не существует хакатона с Id {@case.HackathonId}");
             var caseEntity = CaseMapper.CaseToEntity(@case);
 
             await caseRepository.Create(caseEntity);
             return @case.Id;
+        }
+
+        public async Task<ICollection<CaseEntity>> Get()
+        {
+            return await caseRepository.Get();
         }
 
         public async Task<int> Delete(int id)

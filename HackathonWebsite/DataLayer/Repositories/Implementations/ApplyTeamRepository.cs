@@ -22,5 +22,12 @@ namespace HackathonWebsite.DataLayer.Repositories.Implementations
         {
             return await dbContext.ApplyToTeams.ToListAsync();
         }
+
+        public async Task Apply(int applyId)
+        {
+            var apply = await dbContext.ApplyToTeams.FirstOrDefaultAsync(x => x.Id == applyId);
+            apply.IsApplied = true;
+            await dbContext.SaveChangesAsync();
+        }
     }
 }

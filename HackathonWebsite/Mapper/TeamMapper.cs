@@ -16,6 +16,7 @@ public class TeamMapper
             GitHubLink = team.GitHubLink,
             GoogleDiskLink = team.GoogleDiskLink,
             Title = team.Title,
+            Participants = team.Participants,
             Description = team.Description,
         };
     }

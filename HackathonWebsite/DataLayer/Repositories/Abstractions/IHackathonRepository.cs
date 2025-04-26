@@ -7,6 +7,7 @@ namespace HackathonWebsite.DataLayer.Repositories.Implementations
     {
         Task Create(HackathonEntity hackaton);
         Task Update(HackathonEntity hackaton);
+        Task<ICollection<HackathonEntity>> Get();
         Task Delete(int id);
         Task<HackathonEntity> GetById(int id);
         Task<HackathonEntity> GetByName(string name);

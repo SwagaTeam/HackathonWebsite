@@ -13,33 +13,81 @@ namespace HackathonWebsite.Controllers.Hackaton
     public class CaseController(ICaseService caseService) : ControllerBase
     {
         [HttpPost("create")]
-        public async Task<int> Create([FromBody] CaseDto dto)
+        public async Task<IActionResult> Create([FromBody] CaseDto dto)
         {
-            return await caseService.Create(dto);
+            try
+            {
+                return Ok(await caseService.Create(dto));
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpDelete("delete/{int id}")]
-        public async Task<int> Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            return await caseService.Delete(id);
+            try
+            {
+                return Ok(await caseService.Delete(id));
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPatch("update")]
-        public async Task<int> Update([FromBody] CaseDto dto)
+        public async Task<IActionResult> Update([FromBody] CaseDto dto)
         {
-            return await caseService.Create(dto);
+            try
+            {
+                return Ok(await caseService.Create(dto));
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("get")]
+        public async Task<IActionResult> Get()
+        {
+            try
+            {
+                return Ok(await caseService.Get());
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpGet("get/{id}")]
-        public async Task<CaseDto> GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            return await caseService.GetById(id);
+            try
+            {
+                return Ok(await caseService.GetById(id));
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpGet("get/name/{name}")]
-        public async Task<CaseDto> GetByName(string name)
+        public async Task<IActionResult> GetByName(string name)
         {
-            return await caseService.GetByName(name);
+            try
+            {
+                return Ok(await caseService.GetByName(name));
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

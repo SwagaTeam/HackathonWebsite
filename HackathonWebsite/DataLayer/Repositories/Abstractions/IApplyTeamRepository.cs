@@ -7,5 +7,6 @@ namespace HackathonWebsite.DataLayer.Repositories.Implementations
         Task<ICollection<ApplyToTeamEntity>> Get();
         Task<int> CreateApply(ApplyToTeamEntity entity);
         Task<ApplyToTeamEntity> GetById(int id);
+        Task Apply(int applyId);
     }
 }

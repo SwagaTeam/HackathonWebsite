@@ -9,5 +9,6 @@ namespace HackathonWebsite.DataLayer.Repositories.Implementations
         Task<UserEntity> GetByEmail(string email);
         Task Delete(int id);
         Task Update(UserEntity user);
+        Task<int> SetRole(int id, string role);
     }
 }

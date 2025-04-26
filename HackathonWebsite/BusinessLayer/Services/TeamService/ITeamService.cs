@@ -6,7 +6,8 @@ namespace HackathonWebsite.BusinessLayer.Services.TeamService
     public interface ITeamService
     {
         public Task<int> Create(TeamDto team);
-
+        public Task<ICollection<TeamEntity>> Get();
+        public Task<TeamEntity> GetById(int id);
         public Task<TeamDto> GetByLeadId(int id);
         public Task<TeamDto> GetByLink(string link);
         public Task<TeamDto> GetByUser(int id);

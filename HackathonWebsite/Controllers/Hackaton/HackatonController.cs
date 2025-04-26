@@ -1,43 +1,76 @@
-﻿using HackathonWebsite.BusinessLayer.Services.HackathonService;
+﻿using HackathonWebsite.BusinessLayer.Services.AuthService;
+using HackathonWebsite.BusinessLayer.Services.HackathonService;
 using HackathonWebsite.DTO.Auth;
 using HackathonWebsite.DTO.Auth.UserAuth;
 using HackathonWebsite.DTO.Hackaton;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace HackathonWebsite.Controllers.Hackaton
 {
     [ApiController]
     [Route("hackaton")]
-    public class HackatonController(IHackathonService hackathonService) : ControllerBase
+    public class HackatonController(IHackathonService hackathonService, IAuthService authService) : ControllerBase
     {
         [HttpPost("create")]
-        public async Task<int> Create([FromBody] HackatonDto dto)
+        public async Task<IActionResult> Create([FromBody] HackatonDto dto)
         {
-            return await hackathonService.Create(dto);
+            var role = authService.GetCurrentUserRoles();
+
+            if (role != Roles.ADMIN)
+                return Unauthorized();
+            return Ok(await hackathonService.Create(dto));
         }
 
         [HttpDelete("delete/{int id}")]
-        public async Task<int> Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            return await hackathonService.Delete(id);
+            var role = authService.GetCurrentUserRoles();
+
+            if (role != Roles.ADMIN)
+                return Unauthorized();
+
+            return Ok(await hackathonService.Delete(id));
         }
 
         [HttpPatch("update")]
-        public async Task<int> Update([FromBody] HackatonDto dto)
+        public async Task<IActionResult> Update([FromBody] HackatonDto dto)
         {
-            return await hackathonService.Create(dto);
+            var role = authService.GetCurrentUserRoles();
+
+            if (role != Roles.ADMIN)
+                return Unauthorized();
+            return Ok(await hackathonService.Update(dto));
         }
 
         [HttpGet("get/{id}")]
-        public async Task<HackatonDto> GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            return await hackathonService.GetById(id);
+            var role = authService.GetCurrentUserRoles();
+
+            if (role != Roles.ADMIN)
+                return Unauthorized();
+            return Ok(await hackathonService.GetById(id));
         }
 
         [HttpGet("get/name/{name}")]
-        public async Task<HackatonDto> GetByName(string name)
+        public async Task<IActionResult> GetByName(string name)
         {
-            return await hackathonService.GetByName(name);
+            var role = authService.GetCurrentUserRoles();
+
+            if (role != Roles.ADMIN)
+                return Unauthorized();
+            return Ok(await hackathonService.GetByName(name));
+        }
+
+        [HttpGet("get")]
+        public async Task<IActionResult> Get()
+        {
+            var role = authService.GetCurrentUserRoles();
+
+            if (role != Roles.ADMIN)
+                return Unauthorized();
+            return Ok(await hackathonService.Get());
         }
 
         [HttpGet("get/active")]
@@ -46,9 +79,13 @@ namespace HackathonWebsite.Controllers.Hackaton
             return Ok(await hackathonService.GetActiveHackaton());
         }
 
-        [HttpGet("set/active/{id}")]
-        public async Task<IActionResult> GetActiveHackaton(int id)
+        [HttpPost("set/active/{id}")]
+        public async Task<IActionResult> SetActiveHackaton(int id)
         {
+            var role = authService.GetCurrentUserRoles();
+
+            if (role != Roles.ADMIN)
+                return Unauthorized();
             return Ok(await hackathonService.SetActiveHackaton(id));
         }
     }

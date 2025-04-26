@@ -20,6 +20,11 @@ namespace HackathonWebsite.BusinessLayer.Services.HackathonService
             return id;
         }
 
+        public async Task<ICollection<HackathonEntity>> Get()
+        {
+            return await hackathonRepository.Get();
+        }
+
         public async Task<HackathonEntity> GetActiveHackaton()
         {
             return await hackathonRepository.GetActiveHackaton();

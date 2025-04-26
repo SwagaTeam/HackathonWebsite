@@ -8,6 +8,7 @@ namespace HackathonWebsite.DataLayer.Repositories.Implementations
     {
         Task Create(CaseEntity @case);
         Task Update(CaseEntity @case);
+        Task<ICollection<CaseEntity>> Get();
         Task Delete(int id);
         Task<CaseEntity> GetById(int id);
         Task<CaseEntity> GetByName(string name);
