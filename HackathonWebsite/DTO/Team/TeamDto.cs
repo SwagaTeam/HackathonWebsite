@@ -1,5 +1,6 @@
 using System.Text.Json.Serialization;
 using HackathonWebsite.DataLayer.Entities;
+using System.Text.Json.Serialization;
 
 namespace HackathonWebsite.Dto.Team;
 
