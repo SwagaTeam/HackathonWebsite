@@ -12,6 +12,4 @@ public class TeamDto
     public string GitHubLink { get; set; }
     public string GoogleDiskLink { get; set; }
     public int CaseId { get; set; }
-
-    public ICollection<UserEntity> Participants { get; set; } = new List<UserEntity>();
 }
