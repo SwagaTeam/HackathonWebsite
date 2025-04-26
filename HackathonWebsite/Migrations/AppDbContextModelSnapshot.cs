@@ -94,7 +94,7 @@ namespace HackathonWebsite.Migrations
                     b.Property<int>("TeamId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
@@ -282,9 +282,7 @@ namespace HackathonWebsite.Migrations
 
                     b.HasOne("HackathonWebsite.DataLayer.Entities.UserEntity", "User")
                         .WithMany("AppliesToTeam")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Team");
 

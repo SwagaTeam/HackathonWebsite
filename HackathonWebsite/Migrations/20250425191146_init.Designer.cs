@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HackathonWebsite.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250425164938_changed_name_of_id_in_hack_entity")]
-    partial class changed_name_of_id_in_hack_entity
+    [Migration("20250425191146_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -97,7 +97,7 @@ namespace HackathonWebsite.Migrations
                     b.Property<int>("TeamId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
@@ -150,6 +150,9 @@ namespace HackathonWebsite.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
 
                     b.Property<int>("ParticipantsCount")
                         .HasColumnType("integer");
@@ -282,9 +285,7 @@ namespace HackathonWebsite.Migrations
 
                     b.HasOne("HackathonWebsite.DataLayer.Entities.UserEntity", "User")
                         .WithMany("AppliesToTeam")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Team");
 

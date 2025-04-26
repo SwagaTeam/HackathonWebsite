@@ -12,14 +12,15 @@
   <component name="ChangeListManager">
     <list default="true" id="539c12ef-f92d-49a7-a026-5e478e2514fd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.HackathonWebsite/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.HackathonWebsite/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HackathonWebsite/BusinessLayer/Services/ApplyService/ApplyService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/HackathonWebsite/BusinessLayer/Services/ApplyService/ApplyService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HackathonWebsite/BusinessLayer/Services/ApplyService/IApplyService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/HackathonWebsite/BusinessLayer/Services/ApplyService/IApplyService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HackathonWebsite/Controllers/Team/TeamController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/HackathonWebsite/Controllers/Team/TeamController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HackathonWebsite/DataLayer/Entities/ApplyToTeamEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/HackathonWebsite/DataLayer/Entities/ApplyToTeamEntity.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HackathonWebsite/DataLayer/Repositories/Abstractions/IApplyHackRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/HackathonWebsite/DataLayer/Repositories/Abstractions/IApplyHackRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HackathonWebsite/DataLayer/Repositories/Abstractions/IApplyTeamRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/HackathonWebsite/DataLayer/Repositories/Abstractions/IApplyTeamRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HackathonWebsite/DataLayer/Repositories/Implementations/ApplyHackRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/HackathonWebsite/DataLayer/Repositories/Implementations/ApplyHackRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HackathonWebsite/DataLayer/Repositories/Implementations/ApplyTeamRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/HackathonWebsite/DataLayer/Repositories/Implementations/ApplyTeamRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HackathonWebsite/Migrations/20250425160935_Init.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HackathonWebsite/Migrations/20250425160935_Init.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HackathonWebsite/Migrations/20250425164758_new_migration.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HackathonWebsite/Migrations/20250425164758_new_migration.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HackathonWebsite/Migrations/20250425164938_changed_name_of_id_in_hack_entity.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HackathonWebsite/Migrations/20250425164938_changed_name_of_id_in_hack_entity.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HackathonWebsite/Migrations/20250425181310_IsActiveHackaton.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HackathonWebsite/Migrations/20250425181310_IsActiveHackaton.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HackathonWebsite/Migrations/AppDbContextModelSnapshot.cs" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -145,7 +146,7 @@
       <updated>1745562152536</updated>
       <workItem from="1745562154001" duration="2453000" />
       <workItem from="1745564648649" duration="3245000" />
-      <workItem from="1745603144830" duration="3337000" />
+      <workItem from="1745603144830" duration="5164000" />
     </task>
     <task id="LOCAL-00001" summary="Сделал аунтефикацию + валидацию для регстрации юзера.">
       <option name="closed" value="true" />
