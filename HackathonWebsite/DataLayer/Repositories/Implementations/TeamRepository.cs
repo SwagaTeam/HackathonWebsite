@@ -92,7 +92,7 @@ namespace HackathonWebsite.DataLayer.Repositories.Implementations
             var team = await context.Teams.Include(x=>x.Participants).FirstOrDefaultAsync(x => x.LeaderId == id);
             if (team is not null)
                 return team;
-            throw new NullReferenceException($"Не существует команды с айди {team.Id}");
+            return null;
         }
 
         public async Task<ICollection<TeamEntity>> Get()
