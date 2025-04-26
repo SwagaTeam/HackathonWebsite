@@ -10,7 +10,6 @@ namespace HackathonWebsite.BusinessLayer.Services.TeamService
         public Task<TeamEntity> GetById(int id);
         public Task<TeamDto> GetByLeadId(int id);
         public Task<TeamDto> GetByLink(string link);
-        public Task<TeamDto> GetByUser(int id);
         public Task<int> Update(TeamDto team);
         public Task SendInvite();
         public Task CheckInvites();

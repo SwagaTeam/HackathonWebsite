@@ -72,12 +72,7 @@ namespace HackathonWebsite.BusinessLayer.Services.TeamService
         {
             await repository.AddGoogleLink(teamId, link);
         }
-
-        public async Task<TeamDto> GetByUser(int id)
-        {
-            var team = await repository.GetByUserId(id);
-            return TeamMapper.TeamToDto(team!);
-        }
+        
 
         public async Task<ICollection<TeamEntity>> Get()
         {

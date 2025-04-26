@@ -9,7 +9,6 @@ namespace HackathonWebsite.DataLayer.Repositories.Implementations
         public Task<ICollection<TeamEntity>> Get();
         public Task<TeamEntity?> GetById(int id);
         public Task<TeamEntity?> GetByLeadId(int id);
-        public Task<TeamEntity?> GetByUserId(int id);
         public Task<TeamEntity?> GetByLink(string link);
         public Task AddGithubLink(int teamId, string link);
         public Task AddGoogleLink(int teamId, string link);

@@ -84,7 +84,7 @@ public class TeamController(
     }
 
     [HttpPost("add-github")]
-    public async Task<IActionResult> AddGithubLink([FromBody]string link)
+    public async Task<IActionResult> AddGithubLink(string link)
     {
         try
         {
@@ -93,7 +93,7 @@ public class TeamController(
             if (currentUserId == -1)
                 return Unauthorized("Not authorized");
 
-            var team = await teamService.GetByUser((int)currentUserId!);
+            var team = await teamService.GetByLeadId((int)currentUserId!);
 
             await teamService.AddGithubLink(team.Id, link);
 
@@ -116,7 +116,7 @@ public class TeamController(
             if (currentUserId == -1)
                 return Unauthorized("Not authorized");
 
-            var team = await teamService.GetByUser((int)currentUserId!);
+            var team = await teamService.GetByLeadId((int)currentUserId!);
 
             await teamService.AddGoogleLink(team.Id, link);
 
@@ -142,7 +142,7 @@ public class TeamController(
                 return Unauthorized();
             try
             {
-                team = await teamService.GetByUser((int)currentUserId!);
+                team = await teamService.GetByLeadId((int)currentUserId!);
             }
             catch (Exception ex)
             {

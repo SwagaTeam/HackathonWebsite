@@ -40,14 +40,6 @@ namespace HackathonWebsite.DataLayer.Repositories.Implementations
             else throw new NullReferenceException($"Не существует команды с айди {team.Id}");
         }
 
-        public async Task<TeamEntity?> GetByLeadId(int id)
-        {
-            var team = await context.Teams.Include(x=>x.Participants).FirstOrDefaultAsync(x => x.LeaderId == id);
-            if (team is not null)
-                return team;
-            throw new NullReferenceException($"Не существует команды с айди {team.Id}");
-        }
-
         public async Task<TeamEntity?> GetByLink(string link)
         {
             var team = await context.Teams.Include(x => x.Participants).FirstOrDefaultAsync(x => x.Link == link);
@@ -75,6 +67,7 @@ namespace HackathonWebsite.DataLayer.Repositories.Implementations
             {
                 team.GitHubLink = link;
                 await context.SaveChangesAsync();
+                return;
             }
                 
             throw new NullReferenceException($"Не существует команды с айди {team.Id}");
@@ -87,21 +80,19 @@ namespace HackathonWebsite.DataLayer.Repositories.Implementations
             {
                 team.GoogleDiskLink = link;
                 await context.SaveChangesAsync();
+                return;
             }
 
             throw new NullReferenceException($"Не существует команды с айди {team.Id}");
         }
-
-        public async Task<TeamEntity?> GetByUserId(int id)
+        
+        
+        public async Task<TeamEntity?> GetByLeadId(int id)
         {
-            var team = await context.Teams
-                .Include(x=>x.Participants)
-                .Where(x=>x.Participants.Any(x=>x.Id == id))
-                .FirstOrDefaultAsync();
-
+            var team = await context.Teams.Include(x=>x.Participants).FirstOrDefaultAsync(x => x.LeaderId == id);
             if (team is not null)
                 return team;
-            throw new NullReferenceException($"Не существует команды с юзером {team.Id}");
+            throw new NullReferenceException($"Не существует команды с айди {team.Id}");
         }
 
         public async Task<ICollection<TeamEntity>> Get()

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
@@ -6,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HackathonWebsite.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -34,7 +35,10 @@ namespace HackathonWebsite.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Title = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
-                    ParticipantsCount = table.Column<int>(type: "integer", nullable: false)
+                    ParticipantsCount = table.Column<int>(type: "integer", nullable: false),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -69,7 +73,7 @@ namespace HackathonWebsite.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    UserId = table.Column<int>(type: "integer", nullable: false),
+                    TeamId = table.Column<int>(type: "integer", nullable: false),
                     CaseId = table.Column<int>(type: "integer", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
                     IsApplied = table.Column<bool>(type: "boolean", nullable: false)
@@ -91,7 +95,7 @@ namespace HackathonWebsite.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    UserId = table.Column<int>(type: "integer", nullable: false),
+                    UserId = table.Column<int>(type: "integer", nullable: true),
                     TeamId = table.Column<int>(type: "integer", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
                     IsApplied = table.Column<bool>(type: "boolean", nullable: false)
@@ -158,9 +162,9 @@ namespace HackathonWebsite.Migrations
                 column: "CaseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ApplyToHacks_UserId",
+                name: "IX_ApplyToHacks_TeamId",
                 table: "ApplyToHacks",
-                column: "UserId");
+                column: "TeamId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ApplyToTeams_TeamId",
@@ -194,10 +198,10 @@ namespace HackathonWebsite.Migrations
                 column: "TeamId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_ApplyToHacks_Users_UserId",
+                name: "FK_ApplyToHacks_Teams_TeamId",
                 table: "ApplyToHacks",
-                column: "UserId",
-                principalTable: "Users",
+                column: "TeamId",
+                principalTable: "Teams",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
 
@@ -214,8 +218,7 @@ namespace HackathonWebsite.Migrations
                 table: "ApplyToTeams",
                 column: "UserId",
                 principalTable: "Users",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                principalColumn: "Id");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Teams_Users_LeaderId",
@@ -233,8 +236,8 @@ namespace HackathonWebsite.Migrations
                 table: "Teams");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_Teams_Users_LeaderId",
-                table: "Teams");
+                name: "FK_Users_Teams_TeamId",
+                table: "Users");
 
             migrationBuilder.DropTable(
                 name: "Admins");
@@ -252,10 +255,10 @@ namespace HackathonWebsite.Migrations
                 name: "Hackathons");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "Teams");
 
             migrationBuilder.DropTable(
-                name: "Teams");
+                name: "Users");
         }
     }
 }
