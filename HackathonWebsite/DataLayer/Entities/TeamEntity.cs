@@ -1,4 +1,6 @@
-﻿namespace HackathonWebsite.DataLayer.Entities
+﻿using System.Text.Json.Serialization;
+
+namespace HackathonWebsite.DataLayer.Entities
 {
     public class TeamEntity
     {
@@ -16,6 +18,7 @@
         public virtual CaseEntity Case { get; set; }
         public virtual ICollection<ApplyToTeamEntity> AppliesToTeam { get; set; }
         public virtual ICollection<ApplyToHackEntity> AppliesToHack { get; set; }
+        [JsonIgnore]
         public virtual ICollection<UserEntity> Participants { get; set; } = new List<UserEntity>();
     }
 }
