@@ -14,5 +14,6 @@ namespace HackathonWebsite.DataLayer.Repositories.Implementations
         public Task AddGoogleLink(int teamId, string link);
         public Task AddInTeam(int teamId, int userId);
         public Task Delete(int id);
+        Task<TeamEntity?> GetByUserId(int id);
     }
 }

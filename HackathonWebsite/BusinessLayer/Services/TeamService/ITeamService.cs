@@ -16,5 +16,6 @@ namespace HackathonWebsite.BusinessLayer.Services.TeamService
         public Task AddInTeam(int teamId, int userId);
         public Task AddGithubLink(int teamId, string link);
         public Task AddGoogleLink(int teamId, string link);
+        Task<TeamDto> GetByUser(int id);
     }
 }

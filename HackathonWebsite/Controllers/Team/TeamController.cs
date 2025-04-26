@@ -93,16 +93,17 @@ public class TeamController(
             if (currentUserId == -1)
                 return Unauthorized("Not authorized");
 
-            var team = await teamService.GetByLeadId((int)currentUserId!);
+            var team = await teamService.GetByUser((int)currentUserId!);
 
             await teamService.AddGithubLink(team.Id, link);
 
-            return Ok($"—сылка добавлена");
+            return Ok($"?????? ?????????");
         }
         catch(Exception ex)
         {
             return BadRequest(ex.Message);
         }
+
         
     }
 
@@ -116,17 +117,16 @@ public class TeamController(
             if (currentUserId == -1)
                 return Unauthorized("Not authorized");
 
-            var team = await teamService.GetByLeadId((int)currentUserId!);
+            var team = await teamService.GetByUser((int)currentUserId!);
 
             await teamService.AddGoogleLink(team.Id, link);
 
-            return Ok($"—сылка добавлена");
+            return Ok($"?????? ?????????");
         }
         catch(Exception ex)
         {
             return BadRequest(ex.Message);
         }
-        
     }
 
     [HttpGet("my-team")]

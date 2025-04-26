@@ -99,5 +99,17 @@ namespace HackathonWebsite.DataLayer.Repositories.Implementations
         {
             return await context.Teams.ToListAsync();
         }
+        
+        public async Task<TeamEntity?> GetByUserId(int id)
+        {
+            var team = await context.Teams
+                .Include(x=>x.Participants)
+                .Where(x=>x.Participants.Any(x=>x.Id == id))
+                .FirstOrDefaultAsync();
+
+            if (team is not null)
+                return team;
+            throw new NullReferenceException($"Не существует команды с юзером {team.Id}");
+        }
     }
 }

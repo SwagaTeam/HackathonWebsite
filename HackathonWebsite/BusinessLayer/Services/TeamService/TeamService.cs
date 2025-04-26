@@ -85,5 +85,12 @@ namespace HackathonWebsite.BusinessLayer.Services.TeamService
             var team = await repository.GetById(id);
             return team;
         }
+        
+        public async Task<TeamDto> GetByUser(int id)
+        {
+            var team = await repository.GetByUserId(id);
+            return TeamMapper.TeamToDto(team!);
+        }
+        
     }
 }

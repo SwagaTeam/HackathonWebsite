@@ -12,15 +12,8 @@
   <component name="ChangeListManager">
     <list default="true" id="539c12ef-f92d-49a7-a026-5e478e2514fd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.HackathonWebsite/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.HackathonWebsite/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HackathonWebsite/Migrations/20250425160935_Init.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HackathonWebsite/Migrations/20250425160935_Init.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HackathonWebsite/Migrations/20250425164758_new_migration.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HackathonWebsite/Migrations/20250425164758_new_migration.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HackathonWebsite/Migrations/20250425164938_changed_name_of_id_in_hack_entity.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HackathonWebsite/Migrations/20250425164938_changed_name_of_id_in_hack_entity.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HackathonWebsite/Migrations/20250425181310_IsActiveHackaton.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HackathonWebsite/Migrations/20250425181310_IsActiveHackaton.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HackathonWebsite/Migrations/AppDbContextModelSnapshot.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HackathonWebsite/DataLayer/Repositories/Abstractions/ITeamRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/HackathonWebsite/DataLayer/Repositories/Abstractions/ITeamRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HackathonWebsite/DataLayer/Repositories/Implementations/TeamRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/HackathonWebsite/DataLayer/Repositories/Implementations/TeamRepository.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +35,9 @@
     &quot;accountId&quot;: &quot;e8fd6cec-1943-4a3b-80d0-1d016a51c947&quot;
   }
 }</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5aeb6167299d4cfba30c86624130edbcc90938/32/5c6fefe2/Nullable`1.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
@@ -147,6 +143,8 @@
       <workItem from="1745562154001" duration="2453000" />
       <workItem from="1745564648649" duration="3245000" />
       <workItem from="1745603144830" duration="5164000" />
+      <workItem from="1745651983485" duration="4246000" />
+      <workItem from="1745658310253" duration="302000" />
     </task>
     <task id="LOCAL-00001" summary="Сделал аунтефикацию + валидацию для регстрации юзера.">
       <option name="closed" value="true" />
@@ -179,5 +177,76 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Сделал аунтефикацию + валидацию для регстрации юзера." />
     <option name="LAST_COMMIT_MESSAGE" value="Сделал аунтефикацию + валидацию для регстрации юзера." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/HackathonWebsite/BusinessLayer/Services/MailService/EmailSender.cs</url>
+          <line>11</line>
+          <properties documentPath="D:\Rider Projects\HackathonWebsite\HackathonWebsite\BusinessLayer\Services\MailService\EmailSender.cs" containingFunctionPresentation="Method 'SendEmailAsync'">
+            <startOffsets>
+              <option value="397" />
+            </startOffsets>
+            <endOffsets>
+              <option value="797" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/HackathonWebsite/Controllers/Team/TeamController.cs</url>
+          <line>32</line>
+          <properties documentPath="D:\Rider Projects\HackathonWebsite\HackathonWebsite\Controllers\Team\TeamController.cs" containingFunctionPresentation="Method 'SendInvite'">
+            <startOffsets>
+              <option value="1016" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1067" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/HackathonWebsite/Controllers/Team/TeamController.cs</url>
+          <line>112</line>
+          <properties documentPath="D:\Rider Projects\HackathonWebsite\HackathonWebsite\Controllers\Team\TeamController.cs" containingFunctionPresentation="Method 'AddGoogleLink'">
+            <startOffsets>
+              <option value="3326" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3327" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/HackathonWebsite/Controllers/UserController/UserController.cs</url>
+          <line>26</line>
+          <properties documentPath="D:\Rider Projects\HackathonWebsite\HackathonWebsite\Controllers\UserController\UserController.cs" containingFunctionPresentation="Method 'GetUser'">
+            <startOffsets>
+              <option value="739" />
+            </startOffsets>
+            <endOffsets>
+              <option value="740" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/HackathonWebsite/BusinessLayer/Services/UserService/UserService.cs</url>
+          <line>24</line>
+          <properties documentPath="D:\Rider Projects\HackathonWebsite\HackathonWebsite\BusinessLayer\Services\UserService\UserService.cs" containingFunctionPresentation="Method 'SetRole'">
+            <startOffsets>
+              <option value="955" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1006" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
